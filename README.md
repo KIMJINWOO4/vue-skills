@@ -1,10 +1,12 @@
-# Skills Package
+# Vue Skills
 
-A curated, consolidated collection of [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills for the Vue.js / frontend ecosystem — restructured using **Progressive Disclosure** to minimize context window overhead.
+A curated, consolidated collection of AI agent skills for the Vue.js / frontend ecosystem — restructured using **Progressive Disclosure** to minimize context window overhead.
+
+Compatible with any AI coding agent that supports the `SKILL.md` convention (Claude Code, etc.).
 
 ## The Problem: Skill Explosion
 
-Claude loads every skill's `name` and `description` into the system prompt at startup. If you install skills individually from [antfu/skills](https://github.com/antfu/skills) and other sources, you end up with **17 separate skills** — 17 descriptions permanently occupying your context window:
+The agent loads every skill's `name` and `description` into the system prompt at startup. If you install skills individually from [antfu/skills](https://github.com/antfu/skills) and other sources, you end up with **17 separate skills** — 17 descriptions permanently occupying your context window:
 
 ```
 .claude/skills/
@@ -145,10 +147,10 @@ A single monolithic skill would require loading everything into context every ti
 
 ## Prerequisites
 
-- [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) installed and configured
-- A project directory where you want to use Claude Code
+- An AI coding agent that supports the `.claude/skills/` convention (e.g., [Claude Code](https://docs.anthropic.com/en/docs/claude-code))
+- A project directory where you want to use the skills
 
-Claude Code automatically discovers skills placed in your project's `.claude/skills/` directory. Each subdirectory with a `SKILL.md` file becomes an available skill.
+The agent automatically discovers skills placed in your project's `.claude/skills/` directory. Each subdirectory with a `SKILL.md` file becomes an available skill.
 
 ## Installation
 
@@ -156,23 +158,23 @@ Copy the `skills/` directory into your project's `.claude/skills/`:
 
 ```bash
 # Clone this repo
-git clone https://github.com/KIMJINWOO4/skills_package.git
+git clone https://github.com/KIMJINWOO4/vue-skills.git
 
 # Copy all skills to your project
-cp -r skills_package/skills/ your-project/.claude/skills/
+cp -r vue-skills/skills/ your-project/.claude/skills/
 ```
 
 Or cherry-pick individual skills:
 
 ```bash
 # Just Vue ecosystem
-cp -r skills_package/skills/vue/ your-project/.claude/skills/vue/
+cp -r vue-skills/skills/vue/ your-project/.claude/skills/vue/
 
 # Just build tooling
-cp -r skills_package/skills/build-tooling/ your-project/.claude/skills/build-tooling/
+cp -r vue-skills/skills/build-tooling/ your-project/.claude/skills/build-tooling/
 
 # Just design guidelines
-cp -r skills_package/skills/design/ your-project/.claude/skills/design/
+cp -r vue-skills/skills/design/ your-project/.claude/skills/design/
 ```
 
 ### Verify Installation
@@ -197,13 +199,13 @@ your-project/
 └── package.json
 ```
 
-Run `claude` in your project directory. The skills will appear in the system prompt automatically. You can verify by asking Claude: *"What skills do you have available?"*
+Run your AI agent in the project directory. The skills will appear in the system prompt automatically. You can verify by asking: *"What skills do you have available?"*
 
 ## Usage
 
 ### How Skills Activate
 
-Skills activate **automatically** based on your prompts. You don't need to invoke them manually. Claude matches your request against each skill's `description` field in `SKILL.md` and loads the relevant skill.
+Skills activate **automatically** based on your prompts. You don't need to invoke them manually. The agent matches your request against each skill's `description` field in `SKILL.md` and loads the relevant skill.
 
 | You say... | Skill activated | What happens |
 |---|---|---|
@@ -218,12 +220,12 @@ Skills activate **automatically** based on your prompts. You don't need to invok
 
 ### Slash Command Usage
 
-Some skills (like `vue`, `build-tooling`, `design`) also register as slash commands. You can invoke them explicitly in the Claude Code CLI:
+Some agents support slash commands to invoke skills explicitly:
 
 ```
-/vue          # Activate Vue ecosystem skill
+/vue           # Activate Vue ecosystem skill
 /build-tooling # Activate build tooling skill
-/design       # Activate design skill
+/design        # Activate design skill
 ```
 
 ### Example Workflows
@@ -232,7 +234,7 @@ Some skills (like `vue`, `build-tooling`, `design`) also register as slash comma
 ```
 You: "Create a user profile component with proper TypeScript types"
 
-Claude reads:
+Agent reads:
   → vue/SKILL.md (entry point, sees Composition API rules)
   → references/script-setup-macros.md (defineProps, defineEmits patterns)
   → references/best-practices/... (relevant gotcha guides)
@@ -242,7 +244,7 @@ Claude reads:
 ```
 You: "Configure Turborepo with pnpm workspaces for our monorepo"
 
-Claude reads:
+Agent reads:
   → build-tooling/SKILL.md (entry point)
   → references/turborepo-guide.md (task config, anti-patterns)
   → references/pnpm-guide.md (workspace setup)
@@ -254,7 +256,7 @@ Claude reads:
 ```
 You: "Write tests for my LoginForm component"
 
-Claude reads:
+Agent reads:
   → vue/SKILL.md (entry point)
   → references/testing-guide.md (Vitest + Vue Test Utils overview)
   → testing/component-testing.md (specific patterns)
@@ -301,7 +303,7 @@ Follow the same pattern:
 - Vue best practices skills from [vuejs-ai](https://github.com/vuejs-ai)
 - VueUse skill by [SerKo](https://github.com/serkodev)
 - Turborepo skill from official Turborepo documentation
-- Frontend design skill from Claude example skills
+- Frontend design skill from community examples
 - Web design guidelines from [Vercel Labs](https://github.com/vercel-labs)
 
 ## License
