@@ -1,29 +1,34 @@
 ---
 name: vue
-description: Vue 3 생태계 통합 가이드. Composition API, Pinia 상태관리, Vue Router, VueUse 컴포저블, 테스팅. Vue SFC, .vue 파일, defineProps/defineEmits/defineModel, watchers, Transition/Teleport/Suspense/KeepAlive, 상태관리, 라우팅 작업 시 사용. MUST be used for Vue.js tasks.
+description: Unified Vue 3 ecosystem guide. Composition API, Vue 3.6 Vapor Mode, Pinia state management, Vue Router 5, VueUse composables, testing. Use when working with Vue SFCs, .vue files, defineProps/defineEmits/defineModel, watchers, Transition/Teleport/Suspense/KeepAlive, state management, or routing. MUST be used for Vue.js tasks.
 ---
 
-# Vue 생태계 통합 스킬
+# Vue Ecosystem Skill
 
-> Vue 3.5 기반. 항상 Composition API + `<script setup lang="ts">` 사용.
+> Baseline: Vue 3.5 stable / Vue 3.6 (Vapor Mode) · Vue Router 5 · Pinia 3 · VueUse 14 — as of 2026-07.
+> Always use Composition API + `<script setup lang="ts">`.
 
-## 핵심 원칙
+## Core Principles
 
-- TypeScript 우선, `<script setup lang="ts">` 사용
-- 성능이 중요하면 `shallowRef` > `ref`
-- 항상 Composition API 사용 (Options API 지양)
-- Reactive Props Destructure 지양
+- TypeScript first: `<script setup lang="ts">`
+- Prefer `shallowRef` over `ref` for large or performance-critical state
+- Composition API only — avoid Options API in new code
+- Avoid Reactive Props Destructure unless the whole team understands its compile-time semantics
+- For new perf-critical components, consider Vapor Mode (`<script setup vapor>`) — see the 3.6 reference
 
-## 레퍼런스 구조
+## Reference Map
 
-필요한 토픽의 레퍼런스를 읽어서 상세 지식을 로드하세요.
+Read the reference for the topic you are working on to load detailed knowledge.
 
-| 영역 | 설명 | 경로 |
-|------|------|------|
-| **Vue Core** | Script Setup 매크로, 반응성, 라이프사이클 | [script-setup-macros](references/script-setup-macros.md), [core-new-apis](references/core-new-apis.md) |
-| **빌트인 컴포넌트** | Transition, Teleport, Suspense, KeepAlive | [advanced-patterns](references/advanced-patterns.md) |
-| **Best Practices** | Vue 3 gotchas, 성능, TS 패턴 (100+개 가이드) | [best-practices-index](references/best-practices-index.md) → `best-practices/` |
-| **Pinia** | 상태관리, Store, 플러그인, SSR | [pinia-guide](references/pinia-guide.md) → `pinia/` |
-| **Router** | 네비게이션 가드, 라우트 라이프사이클 | [router-guide](references/router-guide.md) → `router/` |
+| Area | Description | Path |
+|------|-------------|------|
+| **Vue Core** | Script Setup macros, reactivity, lifecycle | [script-setup-macros](references/script-setup-macros.md), [core-new-apis](references/core-new-apis.md) |
+| **Vue 3.6 / Vapor** | Vapor Mode, alien-signals reactivity, interop, migration readiness | [vue-36-vapor](references/vue-36-vapor.md) |
+| **Built-in Components** | Transition, Teleport, Suspense, KeepAlive | [advanced-patterns](references/advanced-patterns.md) |
+| **Best Practices** | Vue 3 gotchas, performance, TS patterns (180+ guides) | [best-practices-index](references/best-practices-index.md) → `best-practices/` |
+| **Pinia** | State management, stores, plugins, SSR | [pinia-guide](references/pinia-guide.md) → `pinia/` |
+| **Router** | Vue Router 5, file-based routing, navigation guards | [router-guide](references/router-guide.md) → `router/` |
 | **Testing** | Vitest + Vue Test Utils, E2E | [testing-guide](references/testing-guide.md) → `testing/` |
-| **VueUse** | 200+ 컴포저블 함수 매핑 | [vueuse-guide](references/vueuse-guide.md) → `vueuse/` |
+| **VueUse** | 200+ composable function map (v14) | [vueuse-guide](references/vueuse-guide.md) → `vueuse/` |
+
+Related skills: `vue-data` (server-state & data fetching), `vue-forms` (forms & validation), `vue-performance` (profiling & optimization), `vue-a11y` (accessibility).

@@ -1,6 +1,6 @@
 # Vite
 
-> Based on Vite 8 beta (Rolldown-powered). Vite 8 uses Rolldown bundler and Oxc transformer.
+> Based on Vite 8 stable (released 2026-03). Rolldown is the default and only bundler (replacing the esbuild + Rollup split), with the Oxc transformer. Builds are typically 10-30x faster than Vite 7.
 
 Vite is a next-generation frontend build tool with fast dev server (native ESM + HMR) and optimized production builds.
 

@@ -9,6 +9,8 @@ metadata:
 
 VitePress is a Static Site Generator (SSG) built on Vite and Vue 3. It takes Markdown content, applies a theme, and generates static HTML that becomes an SPA for fast navigation. Perfect for documentation, blogs, and marketing sites.
 
+> Baseline: VitePress 1.6.x stable (references below target 1.x). VitePress 2.0 is in alpha (Vite 8/Rolldown-based) — for 2.0-alpha projects verify config options against the 2.0 changelog before applying 1.x advice.
+
 **Key Characteristics:**
 - File-based routing with `.md` files
 - Vue components work directly in Markdown

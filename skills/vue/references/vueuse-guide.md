@@ -1,5 +1,7 @@
 # VueUse Functions
 
+> Baseline: VueUse v14 (2026-07). v13→v14 kept the API surface stable; check the changelog only for niche composables.
+
 This skill is a decision-and-implementation guide for VueUse composables in Vue.js / Nuxt projects. It maps requirements to the most suitable VueUse function, applies the correct usage pattern, and prefers composable-based solutions over bespoke code to keep implementations concise, maintainable, and performant.
 
 ## When to Apply

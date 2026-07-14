@@ -4,9 +4,41 @@ A curated, consolidated collection of AI agent skills for the Vue.js / frontend 
 
 Compatible with any AI coding agent that supports the `SKILL.md` convention (Claude Code, etc.).
 
+> **Baseline: July 2026** — Vue 3.5/3.6 (Vapor Mode), Vue Router 5, Pinia 3 + Pinia Colada, VueUse 14, Vite 8 (Rolldown), Vitest 4, Nuxt 4, pnpm 11, TypeScript 7.
+
+## What's Inside
+
+**12 skills, ~640 reference files** — 8 consolidated/updated ecosystem skills plus 4 hand-written workflow skills covering the things every Vue app needs: data fetching, forms, performance, and accessibility.
+
+| Skill | Covers | References |
+|---|---|---|
+| **vue/** | Vue 3 core, 3.6 Vapor Mode, best practices (180+ gotchas), Pinia, Router 5, testing, VueUse (v14) | 482 |
+| **build-tooling/** | Vite 8 (Rolldown), Vitest 4, tsdown, pnpm 11, Turborepo, TypeScript 7 native compiler | 97 |
+| **nuxt/** | Nuxt 4 (app/ directory, data-fetching defaults), migration from Nuxt 3 | 19 |
+| **vue-data/** ✨ | Server state: Pinia Colada, Router Data Loaders, race conditions, caching patterns | 3 |
+| **vue-forms/** ✨ | v-model/defineModel, VeeValidate + Zod, wizards, submit states, uploads | 3 |
+| **vue-performance/** ✨ | Profiling workflow, rendering, bundle size, memory leaks | 4 |
+| **vue-a11y/** ✨ | ARIA component patterns, focus management, a11y testing | 3 |
+| **vue-clean-components/** | Component level hierarchy, Core-Adapter, split decision rules | 7 |
+| **design/** | Frontend aesthetics, Web Interface Guidelines, UnoCSS semantic tokens (antfu-design) | 3 |
+| **vitepress/** | VitePress 1.6 (2.0-alpha notes) | 14 |
+| **antfu/** | Anthony Fu stack conventions | 5 |
+| **find-skills/** | Skill discovery | 0 |
+
+✨ = new in the 2026-07 update.
+
+## What's New (2026-07)
+
+- **Vue 3.6 / Vapor Mode** reference: `<script setup vapor>`, `createVaporApp`, interop plugin, alien-signals reactivity, adoption strategy.
+- **Vue Router 5**: file-based routing in core (`vue-router/vite`, `vue-router/auto-routes`), typed routes, Data Loaders.
+- **Vite 8**: Rolldown as the only bundler, `advancedChunks`, migration notes. **TypeScript 7** native compiler guide.
+- **Nuxt 4** baseline (Nuxt 3 EOL 2026-07-31): `app/` directory, shallow data refs, upgrade checklist.
+- **4 new workflow skills** (`vue-data`, `vue-forms`, `vue-performance`, `vue-a11y`) — the common tasks that previously had no home.
+- Pinia guide now routes server state to **Pinia Colada** instead of hand-rolled loading/error stores.
+
 ## The Problem: Skill Explosion
 
-The agent loads every skill's `name` and `description` into the system prompt at startup. If you install skills individually from [antfu/skills](https://github.com/antfu/skills) and other sources, you end up with **17 separate skills** — 17 descriptions permanently occupying your context window:
+The agent loads every skill's `name` and `description` into the system prompt at startup. If you install skills individually from [antfu/skills](https://github.com/antfu/skills) and other sources, you end up with 17+ separate skills — 17+ descriptions permanently occupying your context window:
 
 ```
 .claude/skills/
@@ -21,113 +53,14 @@ The agent loads every skill's `name` and `description` into the system prompt at
 ├── tsdown/                     #  │
 ├── pnpm/                       #  │
 ├── turborepo/                  # ─┘
-├── frontend-design/            # ─┐  These 2 are both "design"
-├── web-design-guidelines/      # ─┘
-├── nuxt/
-├── vitepress/
-├── antfu/
-└── find-skills/
+└── ...
 ```
 
-This is the **Class Explosion anti-pattern** applied to skills. It's like writing:
-
-```ts
-class NamingValidator { ... }
-class TypeValidator { ... }
-class ComplexityValidator { ... }
-class SecurityValidator { ... }
-// ... 15 more classes, each doing one small thing
-```
+This is the **Class Explosion anti-pattern** applied to skills.
 
 ## The Solution: Progressive Disclosure
 
-Recall the **Law of Demeter**: *"Don't talk to strangers."* An object should only know about its immediate collaborators.
-
-Applied to skill design: **SKILL.md provides the entry point only; detailed knowledge is delegated to `references/`.**
-
-```
-.claude/skills/
-└── code-review/
-    ├── SKILL.md              # "Review my code" → only this is loaded
-    ├── references/           # loaded on demand
-    │   ├── naming-rules.md   # "What are the naming conventions?" → loaded then
-    │   ├── security-checklist.md
-    │   └── performance-guide.md
-    └── scripts/
-        └── lint-check.sh
-```
-
-The agent reads `SKILL.md` first (thin entry point), then drills into specific `references/` files only when the task requires that knowledge. This keeps the context window lean while preserving access to deep expertise.
-
-## Architecture: 17 → 7 Skills (60% Reduction)
-
-| Consolidated Skill | Original Skills (count) | Reference Files |
-|---|---|---|
-| **vue/** | vue, vue-best-practices, vue-router-best-practices, vue-testing-best-practices, vueuse-functions, pinia (6) | 482 |
-| **build-tooling/** | vite, vitest, tsdown, pnpm, turborepo (5) | 97 |
-| **design/** | frontend-design, web-design-guidelines (2) | 3 |
-| **nuxt/** | nuxt (kept as-is) | 20 |
-| **vitepress/** | vitepress (kept as-is) | 16 |
-| **antfu/** | antfu (kept as-is) | 6 |
-| **find-skills/** | find-skills (kept as-is) | 1 |
-
-**Total: 625 reference files across 7 skills.**
-
-## Directory Structure
-
-```
-skills/
-├── vue/                              # Vue 3 ecosystem (merged 6 skills)
-│   ├── SKILL.md                      # Thin entry point
-│   └── references/
-│       ├── script-setup-macros.md    # Vue core APIs
-│       ├── core-new-apis.md
-│       ├── advanced-patterns.md
-│       ├── best-practices-index.md   # Index → best-practices/*.md
-│       ├── best-practices/           # 180 gotcha guides
-│       ├── pinia-guide.md            # Index → pinia/*.md
-│       ├── pinia/                    # 9 store management guides
-│       ├── router-guide.md           # Index → router/*.md
-│       ├── router/                   # 8 navigation pattern guides
-│       ├── testing-guide.md          # Index → testing/*.md
-│       ├── testing/                  # 11 testing guides
-│       ├── vueuse-guide.md           # Index → vueuse/*.md
-│       └── vueuse/                   # 264 composable function guides
-│
-├── build-tooling/                    # Build tools (merged 5 skills)
-│   ├── SKILL.md                      # Thin entry point
-│   └── references/
-│       ├── vite-guide.md → vite/
-│       ├── vitest-guide.md → vitest/
-│       ├── tsdown-guide.md → tsdown/
-│       ├── pnpm-guide.md → pnpm/
-│       └── turborepo-guide.md → turborepo/
-│
-├── design/                           # Frontend design (merged 2 skills)
-│   ├── SKILL.md                      # Thin entry point
-│   └── references/
-│       ├── frontend-aesthetics.md
-│       └── web-guidelines.md
-│
-├── nuxt/                             # Nuxt framework (kept as-is)
-│   ├── SKILL.md
-│   └── references/
-│
-├── vitepress/                        # VitePress (kept as-is)
-│   ├── SKILL.md
-│   └── references/
-│
-├── antfu/                            # Anthony Fu conventions (kept as-is)
-│   ├── SKILL.md
-│   └── references/
-│
-└── find-skills/                      # Skill discovery (kept as-is)
-    └── SKILL.md
-```
-
-## How It Works
-
-### Two-Layer Loading
+**SKILL.md provides the entry point only; detailed knowledge is delegated to `references/`.**
 
 1. **Layer 1 — SKILL.md (always loaded):** A thin description that tells the agent *when* to activate and *where* to look. This is the only thing that costs context at startup.
 
@@ -136,176 +69,115 @@ skills/
 ```
 User: "Add a Pinia store for user auth"
 
-Agent reads: vue/SKILL.md           → sees "Pinia" → references/pinia-guide.md
+Agent reads: vue/SKILL.md               → sees "Pinia" → references/pinia-guide.md
 Agent reads: references/pinia-guide.md  → sees store patterns → pinia/core-stores.md
 Agent reads: pinia/core-stores.md       → has the exact knowledge needed
 ```
 
-### Why Not Just One Giant Skill?
+Consolidation happens **by domain**: six Vue-ecosystem skills became one `vue/` skill; five build tools became one `build-tooling/`. The new workflow skills (`vue-data`, `vue-forms`, …) stay separate because they activate in genuinely different situations — the unit of consolidation is the *trigger context*, not the file count.
 
-A single monolithic skill would require loading everything into context every time. The guide-file pattern gives the agent a **table of contents** to navigate selectively — like the difference between reading an entire textbook versus checking the index first.
+## Directory Structure
 
-## Prerequisites
-
-- An AI coding agent that supports the `.claude/skills/` convention (e.g., [Claude Code](https://docs.anthropic.com/en/docs/claude-code))
-- A project directory where you want to use the skills
-
-The agent automatically discovers skills placed in your project's `.claude/skills/` directory. Each subdirectory with a `SKILL.md` file becomes an available skill.
+```
+skills/
+├── vue/                     # Vue 3 ecosystem (6 skills merged)
+│   ├── SKILL.md
+│   └── references/
+│       ├── vue-36-vapor.md          # Vue 3.6 + Vapor Mode
+│       ├── script-setup-macros.md
+│       ├── best-practices-index.md  → best-practices/ (180+ gotchas)
+│       ├── pinia-guide.md           → pinia/
+│       ├── router-guide.md          → router/ (incl. Router 5 file-based routing)
+│       ├── testing-guide.md         → testing/
+│       └── vueuse-guide.md          → vueuse/ (264 composables)
+│
+├── build-tooling/           # Vite 8 · Vitest 4 · tsdown · pnpm 11 · Turborepo · TS 7
+├── nuxt/                    # Nuxt 4 (+ migration from 3)
+├── vue-data/                # Pinia Colada · Data Loaders · fetching patterns
+├── vue-forms/               # defineModel · VeeValidate+Zod · form UX
+├── vue-performance/         # diagnose → rendering / bundle / memory-leaks
+├── vue-a11y/                # ARIA patterns · focus management · axe testing
+├── vue-clean-components/    # component structure rules
+├── design/                  # aesthetics · web guidelines · UnoCSS tokens
+├── vitepress/
+├── antfu/
+└── find-skills/
+```
 
 ## Installation
 
-Copy the `skills/` directory into your project's `.claude/skills/`:
+An AI coding agent that supports the `.claude/skills/` convention (e.g., [Claude Code](https://docs.anthropic.com/en/docs/claude-code)) discovers skills placed in your project's `.claude/skills/` directory automatically.
 
 ```bash
-# Clone this repo
 git clone https://github.com/KIMJINWOO4/vue-skills.git
 
-# Copy all skills to your project
+# All skills
 cp -r vue-skills/skills/ your-project/.claude/skills/
-```
 
-Or cherry-pick individual skills:
-
-```bash
-# Just Vue ecosystem
+# Or cherry-pick
 cp -r vue-skills/skills/vue/ your-project/.claude/skills/vue/
-
-# Just build tooling
-cp -r vue-skills/skills/build-tooling/ your-project/.claude/skills/build-tooling/
-
-# Just design guidelines
-cp -r vue-skills/skills/design/ your-project/.claude/skills/design/
+cp -r vue-skills/skills/vue-data/ your-project/.claude/skills/vue-data/
 ```
 
-### Verify Installation
-
-After copying, your project structure should look like:
-
-```
-your-project/
-├── .claude/
-│   └── skills/
-│       ├── vue/
-│       │   ├── SKILL.md
-│       │   └── references/
-│       ├── build-tooling/
-│       │   ├── SKILL.md
-│       │   └── references/
-│       ├── design/
-│       │   ├── SKILL.md
-│       │   └── references/
-│       └── ...
-├── src/
-└── package.json
-```
-
-Run your AI agent in the project directory. The skills will appear in the system prompt automatically. You can verify by asking: *"What skills do you have available?"*
+Verify by asking your agent: *"What skills do you have available?"*
 
 ## Usage
 
-### How Skills Activate
+Skills activate **automatically** based on your prompts — the agent matches your request against each skill's `description`.
 
-Skills activate **automatically** based on your prompts. You don't need to invoke them manually. The agent matches your request against each skill's `description` field in `SKILL.md` and loads the relevant skill.
-
-| You say... | Skill activated | What happens |
+| You say... | Skill | The agent reads |
 |---|---|---|
-| "Create a Pinia store for auth" | `vue` | Reads `SKILL.md` → `pinia-guide.md` → `pinia/core-stores.md` |
-| "Configure Vite for SSR" | `build-tooling` | Reads `SKILL.md` → `vite-guide.md` → `vite/ssr.md` |
-| "Set up Vitest for my project" | `build-tooling` | Reads `SKILL.md` → `vitest-guide.md` → `vitest/configuration.md` |
-| "Add a route guard" | `vue` | Reads `SKILL.md` → `router-guide.md` → `router/navigation-guards.md` |
-| "Review my UI for accessibility" | `design` | Reads `SKILL.md` → `web-guidelines.md` → fetches latest rules |
-| "Use VueUse's useStorage" | `vue` | Reads `SKILL.md` → `vueuse-guide.md` → `vueuse/use-storage.md` |
-| "Set up Turborepo caching" | `build-tooling` | Reads `SKILL.md` → `turborepo-guide.md` → `turborepo/caching/RULE.md` |
-| "Build a landing page" | `design` | Reads `SKILL.md` → `frontend-aesthetics.md` |
-
-### Slash Command Usage
-
-Some agents support slash commands to invoke skills explicitly:
-
-```
-/vue           # Activate Vue ecosystem skill
-/build-tooling # Activate build tooling skill
-/design        # Activate design skill
-```
-
-### Example Workflows
-
-**1. Adding a Vue component with best practices:**
-```
-You: "Create a user profile component with proper TypeScript types"
-
-Agent reads:
-  → vue/SKILL.md (entry point, sees Composition API rules)
-  → references/script-setup-macros.md (defineProps, defineEmits patterns)
-  → references/best-practices/... (relevant gotcha guides)
-```
-
-**2. Setting up a monorepo build pipeline:**
-```
-You: "Configure Turborepo with pnpm workspaces for our monorepo"
-
-Agent reads:
-  → build-tooling/SKILL.md (entry point)
-  → references/turborepo-guide.md (task config, anti-patterns)
-  → references/pnpm-guide.md (workspace setup)
-  → turborepo/configuration/tasks.md (detailed task config)
-  → pnpm/core-workspaces.md (workspace protocol)
-```
-
-**3. Testing Vue components:**
-```
-You: "Write tests for my LoginForm component"
-
-Agent reads:
-  → vue/SKILL.md (entry point)
-  → references/testing-guide.md (Vitest + Vue Test Utils overview)
-  → testing/component-testing.md (specific patterns)
-```
+| "Create a Pinia store for auth" | `vue` | `pinia-guide.md` → `pinia/core-stores.md` |
+| "Make this dashboard component faster" | `vue-performance` | `diagnose.md` → `rendering.md` |
+| "Fetch and cache the products list" | `vue-data` | `pinia-colada.md` |
+| "Build a signup form with validation" | `vue-forms` | `vee-validate-zod.md` |
+| "Make this modal accessible" | `vue-a11y` | `focus-management.md`, `aria-components.md` |
+| "Try Vapor Mode on this component" | `vue` | `vue-36-vapor.md` |
+| "Migrate this app to Nuxt 4" | `nuxt` | `nuxt4-migration.md` |
+| "Configure Vite for SSR" | `build-tooling` | `vite-guide.md` → `vite/build-and-ssr.md` |
+| "Split this 500-line component" | `vue-clean-components` | `split-decision-tree.md` |
+| "Set up Turborepo caching" | `build-tooling` | `turborepo-guide.md` → `turborepo/caching/` |
 
 ## Customization
 
-### Adding Your Own References
-
-You can extend any skill by adding files to its `references/` directory:
+Extend any skill by adding files under its `references/` and pointing to them from the skill's guide/index file:
 
 ```
 .claude/skills/vue/references/
 ├── ...existing files...
-└── my-custom-patterns.md    # Your team's conventions
+└── my-team-conventions.md
 ```
 
-Then update the guide file (e.g., `SKILL.md` or the relevant `*-guide.md`) to reference your new file so the agent knows it exists.
+**Key rules for a SKILL.md:**
+- Keep it thin (~30-40 lines) — this is always loaded into context
+- YAML frontmatter with `name` and `description`; the `description` lists the keywords that trigger activation
+- Use a reference table pointing at guide files, and put deep content in `references/`
 
-### Creating a New Consolidated Skill
+## Version Matrix (2026-07)
 
-Follow the same pattern:
-
-```
-.claude/skills/my-skill/
-├── SKILL.md                 # Thin entry point with name + description
-└── references/
-    ├── topic-a-guide.md     # Intermediate index
-    ├── topic-a/             # Detailed references
-    │   ├── subtopic-1.md
-    │   └── subtopic-2.md
-    └── topic-b-guide.md
-```
-
-**Key rules for SKILL.md:**
-- Keep it under ~30 lines — this is always loaded into context
-- Include a YAML frontmatter with `name` and `description`
-- The `description` should list keywords that trigger activation
-- Use a reference table pointing to guide files
+| Package | Version | Notes |
+|---|---|---|
+| vue | 3.5.x stable · 3.6 beta | Vapor Mode feature-complete in 3.6 |
+| vue-router | 5.x | file-based routing in core, no breaking changes from v4 |
+| pinia / @pinia/colada | 3.x / 1.x | Colada = recommended server-state layer |
+| @vueuse/core | 14.x | |
+| vite | 8.x | Rolldown default bundler |
+| vitest | 4.x (5 beta) | |
+| nuxt | 4.4.x | Nuxt 3 EOL 2026-07-31 |
+| pnpm | 11.x | |
+| typescript | 7.x | native (Go) compiler |
 
 ## Credits
 
-- Original skill content sourced from [antfu/skills](https://github.com/antfu/skills) by [Anthony Fu](https://github.com/antfu)
+- Original skill content sourced from [antfu/skills](https://github.com/antfu/skills) by [Anthony Fu](https://github.com/antfu) (incl. antfu-design UnoCSS tokens)
 - Vue best practices skills from [vuejs-ai](https://github.com/vuejs-ai)
 - VueUse skill by [SerKo](https://github.com/serkodev)
 - Turborepo skill from official Turborepo documentation
-- Frontend design skill from community examples
 - Web design guidelines from [Vercel Labs](https://github.com/vercel-labs)
+- Clean-components rules based on Michael Thiessen's Clean Components Toolkit + toss.tech Core-Adapter pattern
+- ARIA patterns based on the [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/)
+- `vue-data` / `vue-forms` / `vue-performance` / `vue-a11y` written for this repo against 2026-07 ecosystem versions
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE) and [THIRD_PARTY_LICENSES](THIRD_PARTY_LICENSES).

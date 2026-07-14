@@ -9,7 +9,14 @@ metadata:
 
 Nuxt is a full-stack Vue framework that provides server-side rendering, file-based routing, auto-imports, and a powerful module system. It uses Nitro as its server engine for universal deployment across Node.js, serverless, and edge platforms.
 
-> The skill is based on Nuxt 3.x, generated at 2026-01-28.
+> Baseline: **Nuxt 4** (4.4.x as of 2026-07). Nuxt 3 reaches end-of-life on 2026-07-31 — treat any Nuxt 3 project as migration work. Nuxt 5 (Nitro v3) is announced but not yet released.
+> For Nuxt 4 structure changes (`app/` directory, data-fetching defaults) read [nuxt4-migration](references/nuxt4-migration.md) FIRST; the other references cover concepts shared by Nuxt 3/4.
+
+## Nuxt 4
+
+| Topic | Description | Reference |
+|-------|-------------|-----------|
+| Nuxt 4 Changes & Migration | `app/` directory, shallow data refs, TS project references, upgrade path from Nuxt 3 | [nuxt4-migration](references/nuxt4-migration.md) |
 
 ## Core
 

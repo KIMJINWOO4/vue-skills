@@ -1,18 +1,29 @@
 ---
 name: build-tooling
-description: 프론트엔드 빌드 도구 통합 가이드. Vite (빌드/개발서버), Vitest (테스트), tsdown (라이브러리 번들링), pnpm (패키지 관리), Turborepo (모노레포). vite.config.ts, vitest, tsdown.config.ts, pnpm-workspace.yaml, turbo.json 작업 시 사용.
+description: Unified frontend build tooling guide. Vite 8 (Rolldown bundler / dev server), Vitest 4 (testing), tsdown (library bundling), pnpm 11 (package management), Turborepo (monorepos), TypeScript 7 native compiler. Use when working with vite.config.ts, vitest, tsdown.config.ts, pnpm-workspace.yaml, turbo.json, or tsconfig.
 ---
 
-# 빌드 도구 통합 스킬
+# Build Tooling Skill
 
-## 레퍼런스 구조
+> Baseline as of 2026-07: Vite 8 (Rolldown default) · Vitest 4 (v5 in beta) · pnpm 11 · tsdown 0.22 · Turborepo 2.10 · TypeScript 7 (native compiler).
 
-필요한 도구의 레퍼런스를 읽어서 상세 지식을 로드하세요.
+## Reference Map
 
-| 도구 | 설명 | 진입점 |
-|------|------|--------|
-| **Vite** | 빌드 도구 설정, 플러그인 API, SSR, Vite 8 Rolldown | [vite-guide](references/vite-guide.md) → `vite/` |
-| **Vitest** | 단위 테스트, 모킹, 커버리지, 테스트 필터링 | [vitest-guide](references/vitest-guide.md) → `vitest/` |
-| **tsdown** | TS/JS 라이브러리 번들링, DTS 생성, tsup 마이그레이션 | [tsdown-guide](references/tsdown-guide.md) → `tsdown/` |
-| **pnpm** | 패키지 관리, 워크스페이스, 카탈로그, 패치 | [pnpm-guide](references/pnpm-guide.md) → `pnpm/` |
-| **Turborepo** | 모노레포 빌드 시스템, 태스크, 캐싱, CI | [turborepo-guide](references/turborepo-guide.md) → `turborepo/` |
+Read the reference for the tool you are working on to load detailed knowledge.
+
+| Tool | Description | Entry point |
+|------|-------------|-------------|
+| **Vite** | Build config, plugin API, SSR, Rolldown migration | [vite-guide](references/vite-guide.md) → `vite/` |
+| **Vitest** | Unit testing, mocking, coverage, test filtering | [vitest-guide](references/vitest-guide.md) → `vitest/` |
+| **tsdown** | TS/JS library bundling, DTS generation, tsup migration | [tsdown-guide](references/tsdown-guide.md) → `tsdown/` |
+| **pnpm** | Package management, workspaces, catalogs, patches | [pnpm-guide](references/pnpm-guide.md) → `pnpm/` |
+| **Turborepo** | Monorepo build system, tasks, caching, CI | [turborepo-guide](references/turborepo-guide.md) → `turborepo/` |
+| **TypeScript 7** | Native (Go) compiler, migration from TS 5.x, perf notes | [typescript-7](references/typescript-7.md) |
+
+## 2026 defaults for new projects
+
+- Vite 8: Rolldown is the only bundler — no opt-in, no esbuild/Rollup split. Most Rollup plugins work unchanged.
+- Vitest 4 stable; Vitest 5 (beta) tracks Vite 8 — prefer 4.x until 5 stabilizes.
+- pnpm 11 with workspace catalogs for version consistency.
+- Libraries: tsdown (Rolldown-based) instead of tsup.
+- Type-checking: TypeScript 7 (`tsgo`) — ~10x faster; keep 5.x/6.x only if a toolchain dependency requires the JS API.
