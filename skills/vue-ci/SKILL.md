@@ -16,6 +16,18 @@ npx -y github:KIMJINWOO4/vue-skills-ci check --format json
 
 Exit code 1 means at least one error. `--fail-on warn` makes warnings fail too, `--fail-on never` only reports.
 
+## Choose rules
+
+The 19 rules are in six groups: `toolchain`, `testing`, `vapor`, `vue`, `nuxt`, `security`. Pick groups or rule ids with `--rules` and leave some out with `--skip-rules`; the workflow and action take the same values as `rules` and `skip-rules` inputs, and `vue-skills-ci.config.json` takes them as `include` and `exclude`.
+
+```bash
+npx -y github:KIMJINWOO4/vue-skills-ci rules                                  # list groups and rules
+npx -y github:KIMJINWOO4/vue-skills-ci check --rules toolchain,security
+npx -y github:KIMJINWOO4/vue-skills-ci check --skip-rules pinia-store-destructure
+```
+
+When setting up CI for someone, ask which groups they want unless they said "all". `toolchain` and `security` suit every project; add `testing`, `vue`, `nuxt` and `vapor` when the project uses that part of the stack.
+
 ## Fix findings
 
 1. Run the check with `--format json` and group the findings by `rule`.
@@ -31,9 +43,12 @@ The rule list with explanations is in [rules](references/rules.md).
 Write the workflow file, then commit it:
 
 ```bash
-npx -y github:KIMJINWOO4/vue-skills-ci init              # full CI: install, lint, type-check, test, build, rules
-npx -y github:KIMJINWOO4/vue-skills-ci init --rules-only # only the rule check, for projects that already have CI
+npx -y github:KIMJINWOO4/vue-skills-ci init --yes                         # full CI: install, lint, type-check, test, build, all rules
+npx -y github:KIMJINWOO4/vue-skills-ci init --rules toolchain,security     # full CI with chosen rule groups
+npx -y github:KIMJINWOO4/vue-skills-ci init --rules-only --yes            # only the rule check, for projects that already have CI
 ```
+
+Agents should pass `--yes` or `--rules`; without them, `init` asks interactively when it runs in a terminal.
 
 The full workflow calls the reusable workflow `KIMJINWOO4/vue-skills-ci/.github/workflows/vue-ci.yml@v1`. It detects pnpm, npm, Yarn or Bun from the lockfile and runs only the scripts that exist (`lint`, `typecheck` or `type-check`, `test:unit` or `test`, `build-only` or `build`). For a monorepo, set `working-directory` to the app folder.
 
