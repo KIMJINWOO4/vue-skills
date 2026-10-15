@@ -173,7 +173,7 @@
       "id": "vue-skills-ci",
       "repo": "https://github.com/KIMJINWOO4/vue-skills-ci",
       "branch": "main",
-      "commit": "a7c36ac1c1a7b54a15ff6c96dde8b9e4f5e1e09d",
+      "commit": "011b42458b9ea1ad77804a1377fe2ec0ff03d812",
       "license": "MIT",
       "copy": [
         { "from": "skills/vue-ci", "to": "skills/vue-ci" }
