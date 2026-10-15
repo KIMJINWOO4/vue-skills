@@ -1,0 +1,13 @@
+{
+  "name": "vue-skills",
+  "version": "2026.10.15",
+  "description": "Agent skills for Vue 3, Nuxt and the Vite toolchain, synced from upstream docs and checked in CI",
+  "author": {
+    "name": "Jinwoo Kim",
+    "url": "https://github.com/KIMJINWOO4"
+  },
+  "homepage": "https://github.com/KIMJINWOO4/vue-skills",
+  "repository": "https://github.com/KIMJINWOO4/vue-skills",
+  "license": "MIT",
+  "keywords": ["vue", "nuxt", "vite", "vitest", "pinia", "vue-router", "vueuse", "vapor", "agent-skills"]
+}

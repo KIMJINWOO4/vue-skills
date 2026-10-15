@@ -7,7 +7,7 @@
 ## What Makes a Composable
 
 A composable MUST involve Vue lifecycle APIs (ref, watch, onMounted, onUnmounted, etc.).
-If it doesn't use any, it's a **plain function** — drop the `use` prefix.
+If it doesn't use any, it's a **plain function**, so drop the `use` prefix.
 
 ```typescript
 // ✅ Composable: groups timer setup + cleanup

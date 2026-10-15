@@ -1,6 +1,8 @@
+<!-- Synced from antfu/skills@feb0f3a:skills/vite/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+
 # Vite
 
-> Based on Vite 8 stable (released 2026-03). Rolldown is the default and only bundler (replacing the esbuild + Rollup split), with the Oxc transformer. Builds are typically 10-30x faster than Vite 7.
+> Based on Vite v8.3.1 (Rolldown-powered), generated at 2026-09-25. Vite 8 uses the Rolldown bundler and the Oxc transformer instead of esbuild + Rollup.
 
 Vite is a next-generation frontend build tool with fast dev server (native ESM + HMR) and optimized production builds.
 

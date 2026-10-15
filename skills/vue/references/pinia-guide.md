@@ -1,10 +1,10 @@
+<!-- Synced from antfu/skills@feb0f3a:skills/pinia/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+
 # Pinia
 
 Pinia is the official state management library for Vue, designed to be intuitive and type-safe. It supports both Options API and Composition API styles, with first-class TypeScript support and devtools integration.
 
-> The skill is based on Pinia v3.0.x (current stable as of 2026-07).
->
-> **Server state?** For API data (fetching, caching, invalidation) prefer **Pinia Colada** over hand-rolled stores — see the `vue-data` skill. Keep Pinia stores for client state.
+> The skill is based on Pinia v4.0.3, generated at 2026-09-25.
 
 ## Core References
 

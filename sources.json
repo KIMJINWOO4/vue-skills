@@ -1,0 +1,173 @@
+{
+  "$comment": "Upstream content synced by scripts/sync.mjs. Each 'to' path is generated: edit this file, not the output. 'pin: true' keeps a source at its commit when running --update.",
+  "synced": "2026-10-15",
+  "sources": [
+    {
+      "id": "antfu-skills",
+      "repo": "https://github.com/antfu/skills",
+      "branch": "main",
+      "commit": "feb0f3aba6566426f12230e7fc7a10d97c1293bb",
+      "license": "MIT",
+      "copy": [
+        { "from": "skills/antfu", "to": "skills/antfu" },
+        { "from": "skills/vue/SKILL.md", "to": "skills/vue/references/api-guide.md", "body": true, "links": {"references/": "api/"} },
+        { "from": "skills/vue/references", "to": "skills/vue/references/api" },
+        { "from": "skills/pinia/SKILL.md", "to": "skills/vue/references/pinia-guide.md", "body": true, "links": {"references/": "pinia/"} },
+        { "from": "skills/pinia/references", "to": "skills/vue/references/pinia" },
+        { "from": "skills/vite/SKILL.md", "to": "skills/build-tooling/references/vite-guide.md", "body": true, "links": {"references/": "vite/"} },
+        { "from": "skills/vite/references", "to": "skills/build-tooling/references/vite", "replace": [["\\]\\(\\.\\./references/", "]("]] },
+        { "from": "skills/vitest/SKILL.md", "to": "skills/build-tooling/references/vitest-guide.md", "body": true, "links": {"references/": "vitest/"} },
+        { "from": "skills/vitest/references", "to": "skills/build-tooling/references/vitest" },
+        { "from": "skills/pnpm/SKILL.md", "to": "skills/build-tooling/references/pnpm-guide.md", "body": true, "links": {"references/": "pnpm/"} },
+        { "from": "skills/pnpm/references", "to": "skills/build-tooling/references/pnpm" },
+        { "from": "skills/nitro/SKILL.md", "to": "skills/nuxt/references/nitro-guide.md", "body": true, "links": {"references/": "nitro/"} },
+        { "from": "skills/nitro/references", "to": "skills/nuxt/references/nitro" },
+        { "from": "skills/unocss/SKILL.md", "to": "skills/design/references/unocss-guide.md", "body": true, "links": {"references/": "unocss/"} },
+        { "from": "skills/unocss/references", "to": "skills/design/references/unocss" }
+      ]
+    },
+    {
+      "id": "antfu-skills-stable",
+      "repo": "https://github.com/antfu/skills",
+      "branch": "main",
+      "commit": "e98e476e315f068f72d53bd3afb34fdd4d5851c3",
+      "pin": true,
+      "pinReason": "Last generation built from released docs (Nuxt 4.x, VitePress 1.x). The 2026-09-25 regeneration targets unreleased Nuxt 5 and VitePress 2 alpha.",
+      "license": "MIT",
+      "copy": [
+        { "from": "skills/nuxt/SKILL.md", "to": "skills/nuxt/references/nuxt-guide.md", "body": true, "links": {"references/": "docs/"} },
+        { "from": "skills/nuxt/references", "to": "skills/nuxt/references/docs" },
+        { "from": "skills/vitepress", "to": "skills/vitepress" }
+      ]
+    },
+    {
+      "id": "vuejs-ai",
+      "repo": "https://github.com/vuejs-ai/skills",
+      "branch": "main",
+      "commit": "c9d355ff23f654309dd02006be671859df0a134c",
+      "license": "MIT",
+      "copy": [
+        { "from": "skills/vue-best-practices/SKILL.md", "to": "skills/vue/references/workflow.md", "body": true, "links": {"references/": "core/"}, "replace": [["load `vue-options-api-best-practices` skill if available", "follow [options-api](options-api.md)"],["load `vue-jsx-best-practices` skill if available", "follow [jsx](jsx.md)"]] },
+        { "from": "skills/vue-best-practices/references", "to": "skills/vue/references/core" },
+        { "from": "skills/create-adaptable-composable/SKILL.md", "to": "skills/vue/references/adaptable-composables.md", "body": true },
+        { "from": "skills/vue-pinia-best-practices/SKILL.md", "to": "skills/vue/references/pinia-gotchas.md", "body": true, "links": {"reference/": "pinia-gotchas/"} },
+        { "from": "skills/vue-pinia-best-practices/reference", "to": "skills/vue/references/pinia-gotchas" },
+        { "from": "skills/vue-router-best-practices/SKILL.md", "to": "skills/vue/references/router-gotchas.md", "body": true, "links": {"reference/": "router/"} },
+        { "from": "skills/vue-router-best-practices/reference", "to": "skills/vue/references/router" },
+        { "from": "skills/vue-testing-best-practices/SKILL.md", "to": "skills/vue/references/testing-guide.md", "body": true, "links": {"reference/": "testing/"} },
+        { "from": "skills/vue-testing-best-practices/reference", "to": "skills/vue/references/testing" },
+        { "from": "skills/vue-options-api-best-practices/SKILL.md", "to": "skills/vue/references/options-api.md", "body": true, "links": {"reference/": "options-api/"} },
+        { "from": "skills/vue-options-api-best-practices/reference", "to": "skills/vue/references/options-api" },
+        { "from": "skills/vue-jsx-best-practices/SKILL.md", "to": "skills/vue/references/jsx.md", "body": true, "links": {"reference/": "jsx/"} },
+        { "from": "skills/vue-jsx-best-practices/reference", "to": "skills/vue/references/jsx" },
+        { "from": "skills/vue-debug-guides/SKILL.md", "to": "skills/vue-debug/references/debug-index.md", "body": true, "links": {"reference/": "guides/"} },
+        { "from": "skills/vue-debug-guides/reference", "to": "skills/vue-debug/references/guides" }
+      ]
+    },
+    {
+      "id": "vueuse",
+      "repo": "https://github.com/vueuse/skills",
+      "branch": "main",
+      "commit": "004812b4aa0815f5745ac30a6a7dc4927aec7b3d",
+      "license": "MIT",
+      "copy": [
+        { "from": "skills/vueuse-functions/SKILL.md", "to": "skills/vue/references/vueuse-guide.md", "body": true, "links": {"references/": "vueuse/"}, "replace": [["\\]\\(\\.\\./(\\w+)/index\\.md\\)", "](vueuse/$1.md)"]] },
+        { "from": "skills/vueuse-functions/references", "to": "skills/vue/references/vueuse", "replace": [["\\]\\(\\.\\./(\\w+)/index\\.md\\)", "]($1.md)"]], "exclude": ["templateRef.md"] }
+      ]
+    },
+    {
+      "id": "tsdown",
+      "repo": "https://github.com/rolldown/tsdown",
+      "branch": "main",
+      "commit": "b46c0d4e9c8ec7673702040c289871448248f178",
+      "license": "MIT",
+      "copy": [
+        { "from": "skills/tsdown/SKILL.md", "to": "skills/build-tooling/references/tsdown-guide.md", "body": true, "links": {"references/": "tsdown/"}, "replace": [["\\]\\(\\.\\./tsdown-migrate/SKILL\\.md\\)", "](https://github.com/rolldown/tsdown/tree/main/skills/tsdown-migrate)"]] },
+        { "from": "skills/tsdown/references", "to": "skills/build-tooling/references/tsdown" }
+      ]
+    },
+    {
+      "id": "turborepo",
+      "repo": "https://github.com/vercel/turborepo",
+      "branch": "main",
+      "commit": "d5e648becc65591ff5c8ed624590ad7ed4b2b150",
+      "pin": true,
+      "pinReason": "Since b19f6a5 (2026-09-25) the skill only points at docs bundled in node_modules/turbo/docs. This is the last snapshot with offline references; build-tooling tells agents to prefer the bundled docs.",
+      "license": "MIT",
+      "copy": [
+        { "from": "skills/turborepo/SKILL.md", "to": "skills/build-tooling/references/turborepo-guide.md", "body": true, "links": {"references/": "turborepo/"} },
+        { "from": "skills/turborepo/references", "to": "skills/build-tooling/references/turborepo" }
+      ]
+    },
+    {
+      "id": "nuxt-ui",
+      "repo": "https://github.com/nuxt/ui",
+      "branch": "v4",
+      "commit": "68d0467eff78a3bb4d4fda2dddf8d938577b28c4",
+      "license": "MIT",
+      "copy": [
+        { "from": "skills/nuxt-ui/SKILL.md", "to": "skills/vue-ui/references/nuxt-ui-guide.md", "body": true, "links": {"references/": "nuxt-ui/"} },
+        { "from": "skills/nuxt-ui/references", "to": "skills/vue-ui/references/nuxt-ui" }
+      ]
+    },
+    {
+      "id": "nuxt-skills",
+      "repo": "https://github.com/onmax/nuxt-skills",
+      "branch": "main",
+      "commit": "46aaca09d588767c26e13781318a1593a7260fb5",
+      "license": "MIT",
+      "copy": [
+        { "from": "skills/reka-ui/SKILL.md", "to": "skills/vue-ui/references/reka-ui-guide.md", "body": true, "links": {"references/": "reka-ui/", "components/": "reka-ui/components/"}, "replace": [["use \\*\\*nuxt-ui\\*\\* skill", "see [nuxt-ui-guide](nuxt-ui-guide.md)"]] },
+        { "from": "skills/reka-ui/references", "to": "skills/vue-ui/references/reka-ui" },
+        { "from": "skills/reka-ui/components", "to": "skills/vue-ui/references/reka-ui/components" },
+        { "from": "skills/nuxt-modules/SKILL.md", "to": "skills/nuxt/references/modules-guide.md", "body": true, "links": {"references/": "modules/"} },
+        { "from": "skills/nuxt-modules/references", "to": "skills/nuxt/references/modules" }
+      ]
+    },
+    {
+      "id": "regle",
+      "repo": "https://github.com/victorgarciaesgi/regle",
+      "branch": "main",
+      "commit": "c2668d6f02ec414bdf01609f323fbdbd6036c838",
+      "license": "MIT",
+      "copy": [
+        { "from": "skills/regle/SKILL.md", "to": "skills/vue-forms/references/regle-guide.md", "body": true, "links": {"references/": "regle/"} },
+        { "from": "skills/regle/references", "to": "skills/vue-forms/references/regle" },
+        { "from": "skills/regle-rules/SKILL.md", "to": "skills/vue-forms/references/regle-rules.md", "body": true, "links": {"references/": "regle-rules/"} },
+        { "from": "skills/regle-rules/references", "to": "skills/vue-forms/references/regle-rules" },
+        { "from": "skills/regle-schemas/SKILL.md", "to": "skills/vue-forms/references/regle-schemas.md", "body": true, "links": {"references/": "regle-schemas/"} },
+        { "from": "skills/regle-schemas/references", "to": "skills/vue-forms/references/regle-schemas" }
+      ]
+    },
+    {
+      "id": "web-interface-guidelines",
+      "repo": "https://github.com/vercel-labs/web-interface-guidelines",
+      "branch": "main",
+      "commit": "434b7f91364665f2f733b310ec54809bf8f37937",
+      "license": "MIT",
+      "copy": [
+        { "from": "command.md", "to": "skills/design/references/web-guidelines-rules.md", "body": true }
+      ]
+    },
+    {
+      "id": "anthropic-skills",
+      "repo": "https://github.com/anthropics/skills",
+      "branch": "main",
+      "commit": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+      "license": "Apache-2.0",
+      "copy": [
+        { "from": "skills/frontend-design/SKILL.md", "to": "skills/design/references/frontend-aesthetics.md", "body": true }
+      ]
+    },
+    {
+      "id": "vercel-skills",
+      "repo": "https://github.com/vercel-labs/skills",
+      "branch": "main",
+      "commit": "13e4063a1cf913f5606d57d42ab83a86f5001e04",
+      "license": "MIT",
+      "copy": [
+        { "from": "skills/find-skills", "to": "skills/find-skills" }
+      ]
+    }
+  ]
+}

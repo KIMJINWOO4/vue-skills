@@ -15,6 +15,8 @@ tsdown can generate bundles in multiple formats. Default is ESM.
 | `iife` | Immediately Invoked Function Expression | Browser `<script>` tags |
 | `umd` | Universal Module Definition | AMD, CommonJS, and globals |
 
+**Note:** CJS is in **maintenance-only mode**. Since the ecosystem is transitioning to ESM and Node.js now supports `require(esm)`, tsdown's CJS-specific features (such as `cjsDefault`) are kept for compatibility but will not be further enhanced or optimized. New libraries are encouraged to publish ESM-only.
+
 ## Usage
 
 ### CLI
@@ -99,7 +101,7 @@ export default defineConfig({
 })
 ```
 
-Output: `dist/index.global.js` (IIFE with global `MyLib`)
+Output: `dist/index.iife.js` (IIFE with global `MyLib`)
 
 ### Universal Library (UMD)
 
@@ -132,7 +134,9 @@ export default defineConfig({
 export default defineConfig({
   entry: ['src/index.tsx'],
   format: ['esm', 'cjs'],
-  external: ['react', 'react-dom'], // Don't bundle dependencies
+  deps: {
+    neverBundle: ['react', 'react-dom'], // Don't bundle dependencies
+  },
   dts: true,
 })
 ```
@@ -145,8 +149,10 @@ export default defineConfig({
 |--------|-----------|
 | ESM | `.mjs` or `.js` (with `"type": "module"`) |
 | CJS | `.cjs` or `.js` (without `"type": "module"`) |
-| IIFE | `.global.js` |
+| IIFE | `.iife.js` |
 | UMD | `.umd.js` |
+
+For custom IIFE filenames, set `outputOptions.entryFileNames`. `outExtensions` customizes extensions or suffixes but does not remove `.iife` or `.umd`.
 
 ### Customize Extensions
 

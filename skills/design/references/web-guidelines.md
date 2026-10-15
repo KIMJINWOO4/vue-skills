@@ -1,30 +1,16 @@
-# Web Interface Guidelines
+# Web Interface Guidelines Review
 
-Review files for compliance with Web Interface Guidelines.
+Review UI code against the [Vercel Web Interface Guidelines](https://github.com/vercel-labs/web-interface-guidelines).
 
-## How It Works
+## Steps
 
-1. Fetch the latest guidelines from the source URL below
-2. Read the specified files (or prompt user for files/pattern)
-3. Check against all rules in the fetched guidelines
-4. Output findings in the terse `file:line` format
+1. Get the rules. If network access is available, fetch the live version, because the guidelines change:
 
-## Guidelines Source
+   ```
+   https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md
+   ```
 
-Fetch fresh guidelines before each review:
-
-```
-https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md
-```
-
-Use WebFetch to retrieve the latest rules. The fetched content contains all the rules and output format instructions.
-
-## Usage
-
-When a user provides a file or pattern argument:
-1. Fetch guidelines from the source URL above
-2. Read the specified files
-3. Apply all rules from the fetched guidelines
-4. Output findings using the format specified in the guidelines
-
-If no files specified, ask the user which files to review.
+   Without network access, use the snapshot in [web-guidelines-rules](web-guidelines-rules.md). Its source commit is recorded in `sources.json` at the repository root.
+2. Read the files the user named. If none were named, ask which files or folders to review.
+3. Check every rule that applies to those files. The rules are written for JSX; translate them to Vue templates (`@click` for `onClick`, `:class` for `className`, `<RouterLink>` or `<NuxtLink>` for `<Link>`).
+4. Report findings in the terse `file:line` format the rules describe. Skip rules that do not apply instead of listing them as passed.

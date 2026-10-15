@@ -7,7 +7,7 @@ license: MIT
 # Vue Clean Components
 
 Rules for writing Vue 3 components that are **easy for humans to read and maintain**.
-Based on Michael Thiessen's Clean Components Toolkit + toss.tech Core-Adapter pattern.
+Based on Michael Thiessen's Clean Components Toolkit and the toss.tech Core-Adapter pattern.
 
 ## When to Use
 
@@ -33,11 +33,11 @@ Based on Michael Thiessen's Clean Components Toolkit + toss.tech Core-Adapter pa
 ## Key Principles
 
 1. **Every component has a level** (L0-Page → L4-Atomic) with strict responsibility boundaries
-2. **Composable = lifecycle cohesion unit** — group related ref + watch + cleanup together, like React hooks
-3. **Core-Adapter separation** — business logic in pure TypeScript, Vue reactivity in thin composables
-4. **No props drilling beyond 1 level** — use provide/inject or store
-5. **Store holds only shared business state** — UI-only state stays in components
-6. **Extract boilerplate at 3+ repetitions** — never prematurely
+2. **A composable is a lifecycle unit**: keep a related ref, its watcher and its cleanup together
+3. **Core-Adapter separation**: business logic in plain TypeScript, Vue reactivity in thin composables
+4. **No props drilling beyond one level**: use provide/inject or a store
+5. **Stores hold only shared business state**: UI-only state stays in components
+6. **Extract boilerplate after three repetitions**, not before
 
 ## Pattern Sources
 
@@ -52,4 +52,3 @@ Based on Michael Thiessen's Clean Components Toolkit + toss.tech Core-Adapter pa
 | Conditional Split | Extract Conditional + Strategy (Thiessen) |
 | Loop Split | List Component + Item Component (Thiessen) |
 
-_Token efficiency: Main skill ~400 tokens, each reference ~600-1000 tokens_

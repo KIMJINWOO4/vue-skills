@@ -1,6 +1,6 @@
 # Focus Management in Vue SPAs
 
-Server-rendered pages get focus behavior free (full page load resets focus). SPAs must recreate it manually — this is where most Vue a11y failures live.
+Server-rendered pages get focus behavior free (full page load resets focus). SPAs must recreate it manually. This is where most Vue a11y failures live.
 
 ## Route changes
 
@@ -85,7 +85,7 @@ watchEffect(() => {
 })
 ```
 
-(Native `<dialog show-modal>` gives trap + top-layer + `Esc` for free — prefer it; see aria-components.)
+(Native `<dialog show-modal>` gives trap + top-layer + `Esc` for free, so prefer it; see aria-components.)
 
 ## Focus after content changes
 
@@ -109,7 +109,7 @@ async function remove(id: string) {
 
 ## Rules of thumb
 
-- Never focus something the user didn't cause — no focus-stealing on mount/poll updates.
+- Never focus something the user didn't cause: no focus-stealing on mount/poll updates.
 - `nextTick()` before focusing anything conditionally rendered.
 - Keep DOM order = visual order = tab order; don't fix layout with `tabindex="1+"` (positive tabindex is always a bug).
 - Test by unplugging the mouse: every flow must complete with Tab/Shift-Tab/Enter/Esc/arrows alone.

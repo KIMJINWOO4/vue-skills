@@ -2,14 +2,14 @@
 
 > Condensed from [antfu/skills → antfu-design](https://github.com/antfu/skills) (MIT, v2026.06). For the full system (design-read dials, bias correction, pattern vocabulary, redesign protocol) read the upstream skill.
 
-Use when building interfaces with UnoCSS in any framework — dense devtools panels to landing pages.
+Use when building interfaces with UnoCSS in any framework, from dense devtools panels to landing pages.
 
 ## Core rules
 
-- **Semantic shortcuts over raw utility chains** in markup: `bg-base`, `border-base`, `color-active`, `btn-action` — not `bg-white dark:bg-#111 ...` repeated everywhere.
+- **Semantic shortcuts over raw utility chains** in markup: `bg-base`, `border-base`, `color-active`, `btn-action` (not `bg-white dark:bg-#111 ...` repeated everywhere).
 - **Design light and dark together.** Every core token defines both themes at the token, so components never carry `dark:` variants.
 - **Name z-index layers** (`z-top-nav`, `z-panel-content`, `z-drawer-content`). No raw `z-50` in templates.
-- **Class-based utilities only** in generated code (`class="..."`) — avoid Attributify syntax.
+- **Class-based utilities only** in generated code (`class="..."`). Avoid Attributify syntax.
 - Keep icon/status class strings **literal** so UnoCSS can statically extract them (add `// @unocss-include` in .ts files that build class strings).
 - `font-mono` + `tabular-nums` for technical values (paths, SHAs, counters, timestamps, percentages).
 - Long paths/IDs: truncate visually, keep the full value in `title`.
@@ -45,6 +45,6 @@ Token families to grow from here: `bg-*` (base/secondary/active/hover), `color-*
 
 ## Why this works
 
-- Components read as *intent* (`border-active`) not implementation — retheming = editing one config.
+- Components read as *intent* (`border-active`) not implementation, so retheming = editing one config.
 - Dark mode can't drift: there is no component-level `dark:` to forget.
-- Low-alpha hex like `#8882` (gray at 13% alpha) gives borders/hover states that work on both themes with a single value — a signature of the style.
+- Low-alpha hex like `#8882` (gray at 13% alpha) gives borders/hover states that work on both themes with a single value. This is a signature of the style.

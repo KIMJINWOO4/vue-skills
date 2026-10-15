@@ -1,4 +1,4 @@
-# Diagnosing Vue Performance — Measure First
+# Diagnosing Vue Performance: Measure First
 
 ## 1. Quantify the complaint
 
@@ -15,7 +15,7 @@ Record a number *before* changing anything. No number → no optimization.
 
 DevTools → **Timeline / Performance** → record while reproducing:
 - **Component render** events show which components re-render and how often.
-- Sort by count first, duration second — a 2ms component rendering 300× beats a 30ms one rendering once.
+- Sort by count first, duration second: a 2ms component rendering 300× beats a 30ms one rendering once.
 
 Enable render timings in dev:
 

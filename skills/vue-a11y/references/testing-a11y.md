@@ -2,7 +2,7 @@
 
 Automated tools catch ~30-40% of WCAG issues (missing labels, contrast, ARIA misuse). The rest needs keyboard walks and screen reader passes. Layer all three.
 
-## 1. Lint layer — catch at write time
+## 1. Lint layer: catch at write time
 
 ```bash
 pnpm add -D eslint-plugin-vuejs-accessibility
@@ -21,7 +21,7 @@ export default [
 
 Catches: missing `alt`, unlabeled inputs, `click` without key handler on non-interactive elements, bad ARIA attributes, `autofocus`, positive `tabindex`.
 
-## 2. Unit/component layer — axe on rendered output
+## 2. Unit/component layer: axe on rendered output
 
 ```bash
 pnpm add -D vitest-axe
@@ -55,10 +55,10 @@ it('error state is announced', async () => {
 ```
 
 - Requires a DOM environment (`environment: 'jsdom'` or Vitest browser mode; browser mode gives real rendering → more accurate axe results, including color contrast).
-- Test **states**, not just initial render: open the modal, trigger the error, expand the menu — that's where violations hide.
-- Testing Library's role-based queries (`getByRole('button', { name: 'Save' })`) are themselves an a11y assertion — if the query fails, the accessible name is broken.
+- Test **states**, not just initial render: open the modal, trigger the error, expand the menu. That's where violations hide.
+- Testing Library's role-based queries (`getByRole('button', { name: 'Save' })`) are themselves an a11y assertion. If the query fails, the accessible name is broken.
 
-## 3. E2E layer — full-page audits + keyboard walks
+## 3. E2E layer: full-page audits + keyboard walks
 
 ```bash
 pnpm add -D @axe-core/playwright
@@ -100,4 +100,4 @@ Run axe once per *page state* (per route + with key overlays open), not just per
 
 ## CI wiring
 
-Lint + vitest-axe run per PR; Playwright axe suite per merge. Treat new violations as build failures — a11y regressions are far cheaper to block than to retrofit.
+Lint + vitest-axe run per PR; Playwright axe suite per merge. Treat new violations as build failures, since a11y regressions are far cheaper to block than to retrofit.

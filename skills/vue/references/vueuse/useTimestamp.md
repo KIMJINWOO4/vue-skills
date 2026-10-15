@@ -39,7 +39,9 @@ const { timestamp, pause, resume } = useTimestamp({ controls: true })
 ## Type Declarations
 
 ```ts
-export interface UseTimestampOptions<Controls extends boolean> {
+export interface UseTimestampOptions<
+  Controls extends boolean,
+> extends ConfigurableScheduler {
   /**
    * Expose more controls
    *
@@ -53,22 +55,15 @@ export interface UseTimestampOptions<Controls extends boolean> {
    */
   offset?: number
   /**
-   * Update the timestamp immediately
-   *
-   * @default true
-   */
-  immediate?: boolean
-  /**
-   * Update interval, or use requestAnimationFrame
-   *
-   * @default requestAnimationFrame
-   */
-  interval?: "requestAnimationFrame" | number
-  /**
    * Callback on each update
    */
   callback?: (timestamp: number) => void
 }
+export type UseTimestampReturn<Controls extends boolean> = Controls extends true
+  ? {
+      timestamp: ShallowRef<number>
+    } & Pausable
+  : ShallowRef<number>
 /**
  * Reactive current timestamp.
  *
@@ -81,5 +76,4 @@ export declare function useTimestamp(
 export declare function useTimestamp(options: UseTimestampOptions<true>): {
   timestamp: ShallowRef<number>
 } & Pausable
-export type UseTimestampReturn = ReturnType<typeof useTimestamp>
 ```

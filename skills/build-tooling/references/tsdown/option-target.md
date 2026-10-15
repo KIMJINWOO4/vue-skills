@@ -80,17 +80,21 @@ export default defineConfig({
 
 ## Supported Targets
 
-### ECMAScript Versions
+tsdown (Rolldown) uses [Oxc](https://oxc.rs/docs/guide/usage/transformer/lowering#target) for syntax lowering. The following environment names are supported (with version numbers, e.g. `chrome100`, `node18`, `es2020`):
 
-- `es2015`, `es2016`, `es2017`, `es2018`, `es2019`, `es2020`, `es2021`, `es2022`, `es2023`, `esnext`
+- **ECMAScript versions**: `es2015`, `es2016`, ..., `es2025`, `esnext`
+- **Browsers**: `chrome`, `edge`, `firefox`, `ie`, `ios`, `opera`, `safari`, `samsung`
+- **Runtimes**: `node`, `deno`, `hermes`, `rhino`
 
-### Browser Versions
+### Baseline Widely Available
 
-- `chrome100`, `safari18`, `firefox110`, `edge100`, etc.
+The special target `'baseline-widely-available'` expands to the browser versions covered by [Baseline Widely Available](https://web.dev/baseline) (e.g. `chrome111`, `edge111`, `firefox114`, `safari16.4`, `ios16.4`):
 
-### Node.js Versions
-
-- `node16`, `node18`, `node20`, `node20.18`, etc.
+```ts
+export default defineConfig({
+  target: 'baseline-widely-available',
+})
+```
 
 ## Examples
 
@@ -193,12 +197,25 @@ export default defineConfig({
 })
 ```
 
+## CSS Targeting
+
+When `@tsdown/css` is installed and a browser target is set, CSS syntax is also lowered automatically:
+
+```ts
+export default defineConfig({
+  target: 'chrome108',  // CSS nesting will be flattened
+})
+```
+
+See [CSS](option-css.md) for full CSS configuration options.
+
 ## Tips
 
 1. **Let tsdown auto-detect** from package.json when possible
 2. **Use `false`** for modern-only builds
 3. **Specify multiple targets** for broader compatibility
 4. **Use legacy decorators** with `experimentalDecorators`
+5. **Install `@tsdown/css`** for CSS support and syntax lowering
 6. **Test output** in target environments
 
 ## Related Options
@@ -206,3 +223,4 @@ export default defineConfig({
 - [Platform](option-platform.md) - Runtime environment
 - [Output Format](option-output-format.md) - Module formats
 - [Minification](option-minification.md) - Code optimization
+- [CSS](option-css.md) - CSS handling and preprocessors

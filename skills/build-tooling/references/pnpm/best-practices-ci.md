@@ -7,6 +7,26 @@ description: Optimizing pnpm for continuous integration and deployment workflows
 
 Best practices for using pnpm in CI/CD environments for fast, reliable builds.
 
+> **CI auto-behaviors:** When pnpm detects a CI environment it switches to **frozen-lockfile** mode automatically and (since v11) **fails on an incompatible lockfile** written by a newer pnpm major instead of rewriting it — keep the CI pnpm version in sync with the one that generated the lockfile. The global virtual store is auto-disabled in CI (no warm cache).
+
+## Installing pnpm in CI
+
+Outside GitHub Actions (which has its own action), the docs now recommend the **standalone install script** over Corepack:
+
+```sh
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+```
+
+- **No Node.js needed** — pnpm is self-contained and can install a runtime afterwards (`pnpm runtime set node lts -g`).
+- **Follows the project's version** — after bootstrap, pnpm switches to the `packageManager`/`devEngines.packageManager` pin on first use, so you don't pin twice.
+- The script sets `PNPM_HOME` and edits a shell profile CI never reloads — export `PNPM_HOME` and put `$PNPM_HOME/bin` on `PATH` yourself.
+
+> Corepack installs a JS shim, so every `pnpm` call starts Node.js to run the shim first — a cost paid on each of CI's many invocations. Installing pnpm itself avoids it.
+
+### Cache the metadata cache too
+
+Since v11.22.0, `pnpm cache path` prints pnpm's metadata cache directory. Caching it (alongside the store) also caches the lockfile verification log, letting a job skip re-checking an unchanged lockfile against supply-chain policies — the dominant install cost once the store is warm.
+
 ## GitHub Actions
 
 ### Basic Setup
@@ -21,20 +41,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: pnpm/action-setup@v4
         with:
-          version: 9
-      
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
-      
-      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm install --frozen-lockfile   # or: pnpm ci
       - run: pnpm test
       - run: pnpm build
 ```
+
+> `pnpm ci` (aliases `clean-install`, `install-clean`) = `pnpm clean` + `pnpm install --frozen-lockfile`, ideal for fully reproducible CI builds.
 
 ### With Store Caching
 
@@ -43,7 +65,7 @@ For larger projects, cache the pnpm store:
 ```yaml
 - uses: pnpm/action-setup@v4
   with:
-    version: 9
+    version: 10
 
 - name: Get pnpm store directory
   shell: bash
@@ -60,6 +82,8 @@ For larger projects, cache the pnpm store:
 
 - run: pnpm install --frozen-lockfile
 ```
+
+> **Trust:** only cache/restore the pnpm store and cache dir between *trusted* jobs. A store an untrusted job can write to must not be reused by trusted jobs — it is part of pnpm's trust domain.
 
 ### Matrix Testing
 
@@ -124,11 +148,13 @@ build:
 
 ## Docker
 
+> **PATH change (v11):** global pnpm binaries now live in `$PNPM_HOME/bin`. In Docker set `ENV PATH="$PNPM_HOME/bin:$PATH"` (not `$PNPM_HOME`). There is also an official image `ghcr.io/pnpm/pnpm:<version>` (Debian slim, pnpm only — choose Node yourself via `pnpm runtime set node <ver> -g` or `devEngines.runtime`).
+
 ### Multi-Stage Build
 
 ```dockerfile
 # Build stage
-FROM node:20-slim AS builder
+FROM node:24-slim AS builder
 
 # Enable corepack for pnpm
 RUN corepack enable
@@ -212,22 +238,18 @@ Skip lifecycle scripts for faster installs (use cautiously):
 pnpm install --frozen-lockfile --ignore-scripts
 ```
 
-## Corepack Integration
+## Pinning the pnpm version
 
-Use Corepack to manage pnpm version:
+Pin with `packageManager` (exact) or `devEngines.packageManager` (range, resolved version stored in the lockfile):
 
 ```json
 // package.json
-{
-  "packageManager": "pnpm@9.0.0"
-}
+{ "packageManager": "pnpm@10.0.0" }
 ```
 
-```yaml
-# GitHub Actions
-- run: corepack enable
-- run: pnpm install --frozen-lockfile
-```
+The standalone install script and `pnpm/action-setup` both honor this pin. To skip the pin check when version management is external (asdf/mise/Volta), set `pmOnFail: ignore` in `pnpm-workspace.yaml`, or run a one-off with `pnpm with current <cmd>`.
+
+> Corepack still works but is no longer the recommended CI path (it adds a Node.js shim to every `pnpm` call). Prefer the standalone script above.
 
 ## Monorepo CI Strategies
 
@@ -271,15 +293,20 @@ jobs:
 
 ## Best Practices Summary
 
-1. **Always use `--frozen-lockfile`** in CI
-2. **Cache the pnpm store** for faster installs
-3. **Use Corepack** for consistent pnpm versions
-4. **Specify `packageManager`** in package.json
-5. **Use `--filter`** in monorepos to build only what changed
-6. **Multi-stage Docker builds** for smaller images
+1. **Use `pnpm ci` or `--frozen-lockfile`** in CI
+2. **Install via the standalone script** (`get.pnpm.io/install.sh`) rather than Corepack
+3. **Cache the pnpm store and metadata cache** (`pnpm cache path`), only across trusted jobs
+4. **Match the CI pnpm major** to the one that wrote the lockfile (CI fails on incompatible lockfiles)
+5. **Pin `packageManager`** (or `devEngines.packageManager`) in package.json
+6. **Use `--filter`** in monorepos to build only what changed
+7. **Multi-stage Docker builds**; set `PATH=$PNPM_HOME/bin:$PATH`
 
-<!-- 
+<!--
 Source references:
 - https://pnpm.io/continuous-integration
+- https://pnpm.io/docker
+- https://pnpm.io/cli/ci
+- https://pnpm.io/cli/cache-path
 - https://github.com/pnpm/action-setup
 -->
+

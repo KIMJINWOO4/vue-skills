@@ -45,13 +45,13 @@ const onSubmit = handleSubmit(async (values) => {
 ```
 
 Key points:
-- `toTypedSchema` gives full input/output type inference — submitted `values` are the *parsed* output (coercions & defaults applied).
+- `toTypedSchema` gives full input/output type inference. Submitted `values` are the *parsed* output (coercions & defaults applied).
 - Default validation triggers are sane (validate on change after first blur/submit); don't fight them.
 - `meta.dirty` for unsaved-changes guards; `meta.valid` if you need it (avoid disabling submit on invalid).
 
 ## Custom inputs: `useField` inside the component
 
-For a form-library-aware `BaseInput`, use `useField` keyed by a `name` prop — it auto-registers with the surrounding `useForm`:
+For a form-library-aware `BaseInput`, use `useField` keyed by a `name` prop. It auto-registers with the surrounding `useForm`:
 
 ```vue
 <script setup lang="ts">
@@ -69,7 +69,7 @@ const { value, errorMessage, handleBlur } = useField<string>(() => props.name)
 </template>
 ```
 
-Then forms are just `<BaseInput name="email" label="Email" />` — no v-model plumbing.
+Then forms are just `<BaseInput name="email" label="Email" />`, with no v-model plumbing.
 
 ## Cross-field & async rules
 
@@ -107,11 +107,11 @@ const { fields, push, remove } = useFieldArray<Item>('items')
 <button type="button" @click="push({ name: '' })">Add</button>
 ```
 
-Use `field.key` as `:key` — never the index.
+Use `field.key` as `:key`, never the index.
 
 ## Gotchas
 
-- Zod 4: import from `'zod'` (v4 is the default export path now); `@vee-validate/zod` supports it — keep both current.
+- Zod 4: import from `'zod'` (v4 is the default export path now); `@vee-validate/zod` supports it. Keep both current.
 - `handleSubmit` swallows rejections into `isSubmitting`; put user-facing failure handling inside the callback, not `.catch` outside.
 - Don't mix `<Form>/<Field>` component API and `useForm` composition API in the same form; pick one (composition API preferred).
 - `resetForm({ values })` to reset to *new* defaults after a successful save, or `meta.dirty` stays true.

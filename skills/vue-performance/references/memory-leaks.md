@@ -48,28 +48,28 @@ store.registeredEls.push(el)        // unmounted el stays reachable → detached
 const els = new WeakSet<Element>()
 ```
 
-Pinia stores outlive components — anything a component pushes into a store must be removed on unmount, or stored via `WeakMap`/`WeakRef`.
+Pinia stores outlive components, so anything a component pushes into a store must be removed on unmount, or stored via `WeakMap`/`WeakRef`.
 
 ### 4. `<KeepAlive>` without bounds
 
 `<KeepAlive>` *intentionally* keeps instances alive. Unbounded + dynamic keys = unbounded memory.
 
 - Always set `:max`, or `include` an explicit whitelist.
-- A `<KeepAlive>` around `<router-view>` with per-param keys caches every visited detail page — usually wrong.
+- A `<KeepAlive>` around `<router-view>` with per-param keys caches every visited detail page, which is usually wrong.
 
 ### 5. Vue Query/data caches
 
-Query layers cap and GC by time (`gcTime`) — but infinite-key growth (a key containing a timestamp or unstable object) defeats it. Keys must be canonical and finite.
+Query layers cap and GC by time (`gcTime`), but infinite-key growth (a key containing a timestamp or unstable object) defeats it. Keys must be canonical and finite.
 
 ### 6. Closures in long-lived callbacks
 
-A debounced/throttled handler stored globally closes over its component's scope. Create debounced functions **inside** setup (so they die with it) — `useDebounceFn` — not at module level capturing reactive state.
+A debounced/throttled handler stored globally closes over its component's scope. Create debounced functions **inside** setup (so they die with it) with `useDebounceFn`, not at module level capturing reactive state.
 
 ## Confirming a leak (workflow)
 
 1. Heap snapshot → run the suspect flow 5-10× → force GC → snapshot → **Comparison** view.
 2. Filter to `Detached` (detached DOM) and your component names.
-3. Pick a leaked object → **Retainers** panel shows the exact reference chain keeping it alive — that chain names the offending listener/store/closure.
+3. Pick a leaked object → **Retainers** panel shows the exact reference chain keeping it alive. That chain names the offending listener/store/closure.
 4. Fix, re-run the same flow, verify the delta is flat.
 
 ## Review checklist

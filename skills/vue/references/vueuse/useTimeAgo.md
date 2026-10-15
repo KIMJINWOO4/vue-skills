@@ -1,5 +1,6 @@
 ---
 category: Time
+utils: formatTimeAgo
 ---
 
 # useTimeAgo
@@ -42,13 +43,7 @@ export type UseTimeAgoFormatter<T = number> = (
   isPast: boolean,
 ) => string
 export type UseTimeAgoUnitNamesDefault =
-  | "second"
-  | "minute"
-  | "hour"
-  | "day"
-  | "week"
-  | "month"
-  | "year"
+  "second" | "minute" | "hour" | "day" | "week" | "month" | "year"
 export interface UseTimeAgoMessagesBuiltIn {
   justNow: string
   past: string | UseTimeAgoFormatter<string>
@@ -96,19 +91,14 @@ export interface FormatTimeAgoOptions<
 export interface UseTimeAgoOptions<
   Controls extends boolean,
   UnitNames extends string = UseTimeAgoUnitNamesDefault,
-> extends FormatTimeAgoOptions<UnitNames> {
+>
+  extends FormatTimeAgoOptions<UnitNames>, ConfigurableScheduler {
   /**
    * Expose more controls
    *
    * @default false
    */
   controls?: Controls
-  /**
-   * Intervals to update, set 0 to disable auto update
-   *
-   * @default 30_000
-   */
-  updateInterval?: number
 }
 export interface UseTimeAgoUnit<
   Unit extends string = UseTimeAgoUnitNamesDefault,

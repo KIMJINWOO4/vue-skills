@@ -2,7 +2,7 @@
 
 > Source patterns: WAI-ARIA Authoring Practices Guide (APG). Before hand-rolling, check whether a headless library already ships the pattern: **Reka UI** (radix-vue's successor), Headless UI Vue, or Vuetify/PrimeVue if already in the project. Hand-roll only simple patterns.
 
-## Disclosure (show/hide) — the simple one
+## Disclosure (show/hide): the simple one
 
 ```vue
 <script setup lang="ts">
@@ -18,11 +18,11 @@ const panelId = useId()
 </template>
 ```
 
-That's the whole pattern. Accordions are disclosures in a list — no `role` gymnastics needed.
+That's the whole pattern. Accordions are disclosures in a list, so no `role` gymnastics are needed.
 
 ## Modal dialog
 
-Prefer native `<dialog>` — focus trapping, `Esc`, and top-layer come free:
+Prefer native `<dialog>`, since focus trapping, `Esc`, and top-layer come free:
 
 ```vue
 <script setup lang="ts">
@@ -43,7 +43,7 @@ watchEffect(() => {
 </template>
 ```
 
-Hand-rolled (Teleport) version requirements — see [focus-management](focus-management.md) for the trap:
+Hand-rolled (Teleport) version requirements (see [focus-management](focus-management.md) for the trap):
 `role="dialog"` + `aria-modal="true"` + `aria-labelledby` → trap focus → `Esc` closes → on close, focus returns to the trigger → background gets `inert`.
 
 ## Tabs
@@ -87,13 +87,13 @@ Key ideas: **roving tabindex** (one tab stop for the whole tablist, arrows move 
 
 ## Menu (dropdown of actions)
 
-Only use `role="menu"` for *action menus* (like a right-click menu). Navigation lists are `<nav><ul>`; select-one-value widgets are listbox/combobox — `menu` misused is worse than nothing.
+Only use `role="menu"` for *action menus* (like a right-click menu). Navigation lists are `<nav><ul>`; select-one-value widgets are listbox/combobox. A misused `menu` is worse than nothing.
 
 Requirements: trigger `aria-haspopup="menu"` + `aria-expanded`; arrow keys move `role="menuitem"`s (roving tabindex); `Esc` closes and refocuses trigger; open focuses first item; click-outside closes (`onClickOutside` from VueUse).
 
 ## Combobox (autocomplete)
 
-The hardest pattern — **strongly prefer Reka UI / Headless UI `Combobox`**. If hand-rolling:
+This is the hardest pattern, so **strongly prefer Reka UI / Headless UI `Combobox`**. If hand-rolling:
 
 ```
 input  role="combobox" aria-expanded aria-controls="LIST_ID"
@@ -111,7 +111,7 @@ list   role="listbox"  → children role="option" aria-selected
 ```
 
 - `polite` for results/status; `assertive` only for errors requiring immediate attention.
-- Toasts with actions must also be reachable by keyboard and not auto-dismiss faster than they can be read (WCAG 2.2.1) — or provide a notifications center.
+- Toasts with actions must also be reachable by keyboard and not auto-dismiss faster than they can be read (WCAG 2.2.1). Alternatively, provide a notifications center.
 
 ## Form errors (with or without a form library)
 

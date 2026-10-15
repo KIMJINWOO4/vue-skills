@@ -1,54 +1,52 @@
-This project includes content derived from the following open source projects.
-All original content retains its respective license.
+This repository redistributes content from the open source projects below.
+Each synced path, its source repository and the exact commit are listed in
+sources.json. Original content keeps its original license.
 
 ================================================================================
-
-antfu/skills
-https://github.com/antfu/skills
 MIT License
-Copyright (c) 2025-present Anthony Fu <https://github.com/antfu>
-
-Skills and the scripts in this repository are MIT licensed.
-Vendored skills from external repositories retain their original licenses.
-
 ================================================================================
 
-vuejs-ai/skills
-https://github.com/vuejs-ai
-MIT License
+antfu/skills (https://github.com/antfu/skills)
+  Copyright (c) 2025-PRESENT Anthony Fu <https://github.com/antfu>
+  Used in: skills/antfu, skills/vitepress, and the Vue API, Pinia, Vite, Vitest,
+  pnpm, Nuxt, Nitro and UnoCSS references.
 
-Vue best practices skills, originally created by SerKo (https://github.com/serkodev)
-and maintained under the vuejs-ai organization.
+vuejs-ai/skills (https://github.com/vuejs-ai/skills)
+  Copyright (c) 2025 hyf0, SerKo <https://github.com/serkodev>
+  Used in: skills/vue/references (core, router, testing, pinia-gotchas,
+  options-api, jsx, workflow, adaptable-composables) and skills/vue-debug.
 
-================================================================================
+vueuse/skills (https://github.com/vueuse/skills)
+  Copyright (c) 2026 SerKo <https://github.com/serkodev>
+  Used in: skills/vue/references/vueuse and vueuse-guide.md.
 
-vueuse/skills
-https://github.com/vueuse/skills
-MIT License
-Copyright (c) 2026 SerKo <https://github.com/serkodev>
+rolldown/tsdown (https://github.com/rolldown/tsdown)
+  Copyright (c) 2025-present VoidZero Inc. & Contributors
+  Used in: skills/build-tooling/references/tsdown.
 
-VueUse composable function skills for Claude Code agents.
+vercel/turborepo (https://github.com/vercel/turborepo)
+  Copyright (c) 2026 Vercel, Inc.
+  Used in: skills/build-tooling/references/turborepo.
 
-================================================================================
+nuxt/ui (https://github.com/nuxt/ui)
+  Copyright (c) 2023 Nuxt
+  Used in: skills/vue-ui/references/nuxt-ui.
 
-Turborepo
-https://turbo.build/repo
-MIT License
-Copyright (c) 2022-present Vercel, Inc.
+onmax/nuxt-skills (https://github.com/onmax/nuxt-skills)
+  MIT, as declared in the repository README and in each skill's frontmatter.
+  Used in: skills/vue-ui/references/reka-ui and skills/nuxt/references/modules.
 
-Turborepo skill content derived from official Turborepo documentation.
+victorgarciaesgi/regle (https://github.com/victorgarciaesgi/regle)
+  Copyright (c) 2023 Victor Garcia
+  Used in: skills/vue-forms/references/regle*.
 
-================================================================================
+vercel-labs/web-interface-guidelines (https://github.com/vercel-labs/web-interface-guidelines)
+  Copyright (c) 2025 Vercel Labs
+  Used in: skills/design/references/web-guidelines-rules.md.
 
-Vercel Labs — Web Interface Guidelines
-https://github.com/vercel-labs/web-interface-guidelines
-MIT License
-
-Web interface guidelines skill content sourced from Vercel Labs.
-
-================================================================================
-
-All of the above are distributed under the MIT License:
+vercel-labs/skills (https://github.com/vercel-labs/skills)
+  Copyright (c) 2026 Vercel, Inc.
+  Used in: skills/find-skills.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -67,3 +65,23 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+================================================================================
+Apache License 2.0
+================================================================================
+
+anthropics/skills (https://github.com/anthropics/skills)
+  Published by Anthropic under the Apache License 2.0
+  Used in: skills/design/references/frontend-aesthetics.md, copied from
+  skills/frontend-design/SKILL.md with the frontmatter removed and a source
+  comment added. No other changes.
+  Full license text: LICENSES/Apache-2.0.txt
+
+================================================================================
+Hand-written content
+================================================================================
+
+The skills vue-review, vue-upgrade, vue-data, vue-forms (except the Regle
+references), vue-performance, vue-a11y and vue-clean-components, every SKILL.md
+not listed in sources.json, and the scripts are written for this repository
+and released under this repository's MIT license (see LICENSE).

@@ -2,7 +2,7 @@
 
 ## Submission states
 
-A submit button has four states — model them explicitly:
+A submit button has four states. Model them explicitly:
 
 ```ts
 type SubmitState = 'idle' | 'submitting' | 'success' | 'error'
@@ -29,7 +29,7 @@ useEventListener(window, 'beforeunload', (e) => {
 })
 ```
 
-Replace `confirm()` with your dialog component via a promise (`createTemplatePromise` from VueUse works well) — but keep the logic in the guard.
+Replace `confirm()` with your dialog component via a promise (`createTemplatePromise` from VueUse works well), but keep the logic in the guard.
 
 ## Multi-step wizard
 
@@ -86,7 +86,7 @@ async function upload() {
 ```
 
 - Validate size/type client-side *before* upload (fast feedback), and again server-side (security).
-- Don't set `Content-Type` manually with `FormData` — the boundary must be auto-generated.
+- Don't set `Content-Type` manually with `FormData`, because the boundary must be auto-generated.
 - Drag-and-drop: `useDropZone` (VueUse) on a wrapper, but always keep the `<input type="file">` for keyboard/screen-reader users.
 - Upload on submit for small forms; upload-immediately-with-token for large files inside long forms.
 
@@ -98,4 +98,4 @@ watchDebounced(form, () => saveDraft(toRaw(form)), { debounce: 2000, deep: true 
 
 - Save to localStorage (`useStorage`) for resilience, server for cross-device.
 - Show "Draft saved HH:mm" passively; never toast on every autosave.
-- Autosave drafts must **not** run schema validation — persist invalid intermediate states freely.
+- Autosave drafts must **not** run schema validation. Persist invalid intermediate states freely.

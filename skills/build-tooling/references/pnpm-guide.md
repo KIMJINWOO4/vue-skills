@@ -1,33 +1,43 @@
-pnpm is a fast, disk space efficient package manager. It uses a content-addressable store to deduplicate packages across all projects on a machine, saving significant disk space. pnpm enforces strict dependency resolution by default, preventing phantom dependencies. Configuration should preferably be placed in `pnpm-workspace.yaml` for pnpm-specific settings.
+<!-- Synced from antfu/skills@feb0f3a:skills/pnpm/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
-**Important:** When working with pnpm projects, agents should check for `pnpm-workspace.yaml` and `.npmrc` files to understand workspace structure and configuration. Always use `--frozen-lockfile` in CI environments.
+pnpm is a fast, disk space efficient package manager. It uses a content-addressable store to deduplicate packages across all projects on a machine, and enforces strict dependency resolution by default, preventing phantom dependencies.
 
-> The skill is based on pnpm 10.x, generated at 2026-01-28.
+**pnpm v12 is a Rust rewrite** of v11: stable, and keeps v11's commands, flags, settings, and lockfile format — so most guidance here applies to both. A handful of v12 behaviors differ (git deps resolve via HTTPS, project-aware global bins, other package managers, `packageImportMethod: auto` hardlinks first on Linux, `--resolution-only` removed) — see best-practices-migration.
+
+**Configuration model (important):** pnpm settings live in `pnpm-workspace.yaml` (and the global `config.yaml`) using **camelCase** keys. `.npmrc` is used **only** for authentication/registry credentials, and the `pnpm` field of `package.json` is no longer read. When working in a pnpm project, check `pnpm-workspace.yaml` for settings/workspace structure and `.npmrc` only for auth. Always use `--frozen-lockfile` (or `pnpm ci`) in CI.
+
+> The skill is based on pnpm 12.x, generated at 2026-09-25. It covers v11+v12 behavior (config split, isolated global packages, `allowBuilds`, `pmOnFail`, global virtual store, native release management, workspace task orchestration, and experimental Python/Cargo support) where current docs describe them.
 
 ## Core
 
 | Topic | Description | Reference |
 |-------|-------------|-----------|
-| CLI Commands | Install, add, remove, update, run, exec, dlx, and workspace commands | [core-cli](pnpm/core-cli.md) |
-| Configuration | pnpm-workspace.yaml, .npmrc settings, and package.json fields | [core-config](pnpm/core-config.md) |
-| Workspaces | Monorepo support with filtering, workspace protocol, and shared lockfile | [core-workspaces](pnpm/core-workspaces.md) |
-| Store | Content-addressable storage, hard links, and disk efficiency | [core-store](pnpm/core-store.md) |
+| CLI Commands | install/add/remove/update, run, dlx/pnx, workspace, runtime, publishing (version, view, sbom, stage) | [core-cli](pnpm/core-cli.md) |
+| Configuration | pnpm-workspace.yaml settings (camelCase), global config.yaml, packageConfigs, .npmrc auth | [core-config](pnpm/core-config.md) |
+| Workspaces | Monorepo support: filtering, workspace protocol, shared lockfile, packageConfigs | [core-workspaces](pnpm/core-workspaces.md) |
+| Store | Content-addressable store, virtual store, node linker modes, frozen/read-only store | [core-store](pnpm/core-store.md) |
 
 ## Features
 
 | Topic | Description | Reference |
 |-------|-------------|-----------|
-| Catalogs | Centralized dependency version management for workspaces | [features-catalogs](pnpm/features-catalogs.md) |
-| Overrides | Force specific versions of dependencies including transitive | [features-overrides](pnpm/features-overrides.md) |
-| Patches | Modify third-party packages with custom fixes | [features-patches](pnpm/features-patches.md) |
-| Aliases | Install packages under custom names using npm: protocol | [features-aliases](pnpm/features-aliases.md) |
-| Hooks | Customize resolution with .pnpmfile.cjs hooks | [features-hooks](pnpm/features-hooks.md) |
-| Peer Dependencies | Auto-install, strict mode, and dependency rules | [features-peer-deps](pnpm/features-peer-deps.md) |
+| Catalogs | Centralized dependency versions; catalogMode, catalog: in overrides | [features-catalogs](pnpm/features-catalogs.md) |
+| Overrides | Force versions (incl. transitive & peer deps); packageExtensions | [features-overrides](pnpm/features-overrides.md) |
+| Patches | Modify third-party packages; patchedDependencies in pnpm-workspace.yaml | [features-patches](pnpm/features-patches.md) |
+| Aliases | Install under custom names (npm:) and registry aliases (namedRegistries) | [features-aliases](pnpm/features-aliases.md) |
+| Hooks | .pnpmfile.mjs hooks (readPackage, updateConfig, beforePacking), finders, resolvers/fetchers | [features-hooks](pnpm/features-hooks.md) |
+| Peer Dependencies | Auto-install, strict mode, rules, dedupePeers, peers check | [features-peer-deps](pnpm/features-peer-deps.md) |
+| Config Dependencies | Share hooks/settings/catalogs/patches across repos via configDependencies | [features-config-dependencies](pnpm/features-config-dependencies.md) |
+| Global Virtual Store & Shims | Shared node_modules, git-worktree multi-agent setups, isolated global packages, project-aware bins, other package managers | [features-global-virtual-store](pnpm/features-global-virtual-store.md) |
+| Supply-Chain Security | Build approval (allowBuilds), minimumReleaseAge, trustPolicy, lockfile integrity | [features-supply-chain-security](pnpm/features-supply-chain-security.md) |
+| Task Orchestration | Cross-project task graphs (tasks/dependsOn), concurrency groups, priority, pnpm pipeline | [features-task-orchestration](pnpm/features-task-orchestration.md) |
+| Release Management | Native versioning: pnpm change/version -r/lane, lanes, epics, fixed groups | [features-versioning](pnpm/features-versioning.md) |
+| Multi-Ecosystem | Python (pypi:) and Cargo (crate:) dependencies alongside npm (experimental) | [features-multi-ecosystem](pnpm/features-multi-ecosystem.md) |
 
 ## Best Practices
 
 | Topic | Description | Reference |
 |-------|-------------|-----------|
-| CI/CD Setup | GitHub Actions, GitLab CI, Docker, and caching strategies | [best-practices-ci](pnpm/best-practices-ci.md) |
-| Migration | Migrating from npm/Yarn, handling phantom deps, monorepo migration | [best-practices-migration](pnpm/best-practices-migration.md) |
-| Performance | Install optimizations, store caching, workspace parallelization | [best-practices-performance](pnpm/best-practices-performance.md) |
+| CI/CD Setup | GitHub Actions, GitLab, Docker, pnpm ci, store caching, frozen lockfiles | [best-practices-ci](pnpm/best-practices-ci.md) |
+| Migration | npm/Yarn → pnpm, phantom deps, and pnpm v10 → v11 → v12 upgrade notes | [best-practices-migration](pnpm/best-practices-migration.md) |
+| Performance | Install optimizations, allowBuilds, global virtual store, workspace parallelization | [best-practices-performance](pnpm/best-practices-performance.md) |

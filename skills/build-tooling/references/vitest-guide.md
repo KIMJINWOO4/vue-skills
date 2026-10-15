@@ -1,3 +1,5 @@
+<!-- Synced from antfu/skills@feb0f3a:skills/vitest/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+
 Vitest is a next-generation testing framework powered by Vite. It provides a Jest-compatible API with native ESM, TypeScript, and JSX support out of the box. Vitest shares the same config, transformers, resolvers, and plugins with your Vite app.
 
 **Key Features:**
@@ -9,7 +11,7 @@ Vitest is a next-generation testing framework powered by Vite. It provides a Jes
 - Built-in coverage via V8 or Istanbul
 - Snapshot testing, mocking, and spy utilities
 
-> The skill is based on Vitest 3.x, generated at 2026-01-28.
+> The skill is based on Vitest 5.0.1, generated at 2026-09-25.
 
 ## Core
 
@@ -32,6 +34,9 @@ Vitest is a next-generation testing framework powered by Vite. It provides a Jes
 | Test Context | Test fixtures, context.expect, test.extend for custom fixtures | [features-context](vitest/features-context.md) |
 | Concurrency | Concurrent tests, parallel execution, sharding | [features-concurrency](vitest/features-concurrency.md) |
 | Filtering | Filter tests by name, file patterns, tags | [features-filtering](vitest/features-filtering.md) |
+| Test Tags | Label tests with tags to filter runs and apply shared options | [features-test-tags](vitest/features-test-tags.md) |
+| Reporters | Built-in reporters, default selection, CI/output config | [features-reporters](vitest/features-reporters.md) |
+| Benchmarking | Write benchmarks with the bench fixture (Tinybench) | [features-benchmarking](vitest/features-benchmarking.md) |
 
 ## Advanced
 

@@ -1,0 +1,20 @@
+{
+  "name": "vue-skills",
+  "owner": {
+    "name": "Jinwoo Kim",
+    "url": "https://github.com/KIMJINWOO4"
+  },
+  "metadata": {
+    "description": "Agent skills for Vue 3, Nuxt and the Vite toolchain, synced from upstream docs and checked in CI"
+  },
+  "plugins": [
+    {
+      "name": "vue-skills",
+      "source": "./",
+      "version": "2026.10.15",
+      "description": "16 skills for Vue 3, Vapor Mode, Pinia, Vue Router, VueUse, Nuxt, Vite, Vitest, debugging, code review, upgrades, forms, data fetching, performance, accessibility and UI libraries",
+      "keywords": ["vue", "nuxt", "vite", "vitest", "pinia", "vue-router", "vueuse", "vapor", "pnpm", "unocss", "reka-ui", "nuxt-ui"],
+      "category": "frontend"
+    }
+  ]
+}

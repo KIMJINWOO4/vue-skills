@@ -37,8 +37,9 @@ export interface MemoryInfo {
   readonly usedJSHeapSize: number
   [Symbol.toStringTag]: "MemoryInfo"
 }
-export interface UseMemoryOptions extends UseIntervalFnOptions {
-  interval?: number
+export interface UseMemoryOptions extends ConfigurableScheduler {}
+export interface UseMemoryReturn extends Supportable {
+  memory: ShallowRef<MemoryInfo | undefined>
 }
 /**
  * Reactive Memory Info.
@@ -48,9 +49,5 @@ export interface UseMemoryOptions extends UseIntervalFnOptions {
  *
  * @__NO_SIDE_EFFECTS__
  */
-export declare function useMemory(options?: UseMemoryOptions): {
-  isSupported: ComputedRef<boolean>
-  memory: Ref<MemoryInfo | undefined, MemoryInfo | undefined>
-}
-export type UseMemoryReturn = ReturnType<typeof useMemory>
+export declare function useMemory(options?: UseMemoryOptions): UseMemoryReturn
 ```

@@ -1,4 +1,4 @@
-# Vue.js Testing Best Practices
+<!-- Synced from vuejs-ai/skills@c9d355f:skills/vue-testing-best-practices/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 Vue.js testing best practices, patterns, and common gotchas.
 

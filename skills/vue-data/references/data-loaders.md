@@ -2,7 +2,7 @@
 
 > Import from `vue-router/experimental`. Loaders tie data fetching to navigation: the router collects every loader used by the target route, runs them in parallel **during** navigation, and (by default) only completes navigation when data is ready. No flash of empty page, no manual `isLoading` choreography, data shared across components without prop drilling.
 
-Requires the `vue-router/vite` plugin (file-based routing setup — see `vue` skill → router references).
+Requires the `vue-router/vite` plugin (file-based routing setup; see `vue` skill → router references).
 
 ## Basic loader
 
@@ -24,14 +24,14 @@ const { data: user, isLoading, error, reload } = useUserData()
 ```
 
 Notes:
-- The loader lives in a **separate non-setup `<script>` block** and is exported — the plugin picks it up and attaches it to the route. It can also live in a separate file and be exported from the page component.
+- The loader lives in a **separate non-setup `<script>` block** and is exported. The plugin picks it up and attaches it to the route. It can also live in a separate file and be exported from the page component.
 - Loaders receive the target route + `AbortSignal` (aborted when navigation is cancelled → automatic race-condition safety).
-- Any component (not just the page) can call `useUserData()` to read the same data — one fetch per navigation.
+- Any component (not just the page) can call `useUserData()` to read the same data, with one fetch per navigation.
 - Throwing `NavigationResult` from a loader controls navigation (redirect on 404 etc.).
 
 ## Colada loader (cached)
 
-`defineColadaLoader` combines loaders with Pinia Colada caching — navigation-aware *and* cached/deduplicated between navigations:
+`defineColadaLoader` combines loaders with Pinia Colada caching (navigation-aware *and* cached/deduplicated between navigations):
 
 ```vue
 <script lang="ts">
@@ -65,4 +65,4 @@ const { data: user, status, error, isLoading, refresh, reload } = useUserData()
 - Widget/secondary data, polling, user-triggered fetches → **`useQuery`** in the component.
 - They compose: loaders for the critical path, queries for the rest.
 
-⚠️ Experimental status: API shipped under `vue-router/experimental` precisely because minor releases may adjust it — pin `vue-router` minor versions and read release notes on upgrade.
+⚠️ Experimental status: API shipped under `vue-router/experimental` precisely because minor releases may adjust it. Pin `vue-router` minor versions and read release notes on upgrade.

@@ -4,7 +4,7 @@ category: Time
 
 # useCountdown
 
-Wrapper for `useIntervalFn` that provides a countdown timer.
+Reactive countdown timer in seconds.
 
 ## Usage
 
@@ -49,11 +49,7 @@ start()
 ## Type Declarations
 
 ```ts
-export interface UseCountdownOptions {
-  /**
-   *  Interval for the countdown in milliseconds. Default is 1000ms.
-   */
-  interval?: MaybeRefOrGetter<number>
+export interface UseCountdownOptions extends ConfigurableScheduler {
   /**
    * Callback function called when the countdown reaches 0.
    */
@@ -62,12 +58,6 @@ export interface UseCountdownOptions {
    * Callback function called on each tick of the countdown.
    */
   onTick?: () => void
-  /**
-   * Start the countdown immediately
-   *
-   * @default false
-   */
-  immediate?: boolean
 }
 export interface UseCountdownReturn extends Pausable {
   /**
@@ -88,7 +78,7 @@ export interface UseCountdownReturn extends Pausable {
   start: (countdown?: MaybeRefOrGetter<number>) => void
 }
 /**
- * Wrapper for `useIntervalFn` that provides a countdown timer in seconds.
+ * Reactive countdown timer in seconds.
  *
  * @param initialCountdown
  * @param options

@@ -37,7 +37,7 @@ Same for `active-id` patterns: pass `:active="item.id === activeId"` (boolean fl
 - `:key` must be stable identity (id), never index, never `Math.random()`.
 - Filter/sort in a `computed`; method calls in templates run every render and break caching.
 - **> ~200 rows → virtualize**: `useVirtualList` (VueUse) for simple fixed-size cases, `vue-virtual-scroller`/`@tanstack/vue-virtual` for dynamic heights.
-- Avoid a component-per-cell in huge tables — component instances have overhead; plain elements inside the row component render faster (measure first; this trades maintainability).
+- Avoid a component-per-cell in huge tables. Component instances have overhead; plain elements inside the row component render faster (measure first; this trades maintainability).
 
 ## Targeted directives
 
@@ -59,9 +59,9 @@ const HeavyChart = defineAsyncComponent(() => import('./HeavyChart.vue'))
 ```
 
 - Pair with `<Suspense>` or a loading component option.
-- Modal/dialog content: `v-if` on open, async component inside — pays neither bundle nor mount cost until first open.
+- Modal/dialog content: `v-if` on open, async component inside. This pays neither bundle nor mount cost until first open.
 - Expensive non-visual computation on interaction: wrap state writes in `requestAnimationFrame` / `scheduler.yield()` chunks so input stays responsive.
-- `<KeepAlive :max="N">` caches expensive remounts (tabs) — bounded, or it becomes a memory problem.
+- `<KeepAlive :max="N">` caches expensive remounts (tabs). Keep it bounded, or it becomes a memory problem.
 
 ## Vapor Mode (Vue 3.6+) as the big lever
 
@@ -71,9 +71,9 @@ When a component is *structurally* hot (large dashboards, editors, 60fps updates
 <script setup lang="ts" vapor>
 ```
 
-No VDOM diffing at all — see `vue` skill → `vue-36-vapor` for constraints/interop. Prefer this over heroic `v-memo` engineering once on 3.6.
+No VDOM diffing at all. See `vue` skill → `vue-36-vapor` for constraints/interop. Prefer this over heroic `v-memo` engineering once on 3.6.
 
 ## Animation
 
 - Animate `transform`/`opacity` only (compositor); never `top/left/width/height` in lists.
-- `<TransitionGroup>` with many items: FLIP move animations are O(n) layout reads — cap animated list sizes or disable `move` for bulk updates.
+- `<TransitionGroup>` with many items: FLIP move animations are O(n) layout reads, so cap animated list sizes or disable `move` for bulk updates.

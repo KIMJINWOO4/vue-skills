@@ -72,17 +72,51 @@ export default defineConfig({
 
 ## Fail on Warnings
 
-The `failOnWarn` option controls whether warnings cause the build to exit with a non-zero code. Defaults to `'ci-only'` — warnings fail the build in CI but not locally.
+The `failOnWarn` option controls whether warnings cause the build to exit with a non-zero code. Defaults to `false` — warnings never fail the build.
 
 ```ts
 export default defineConfig({
-  failOnWarn: 'ci-only', // Default: fail on warnings only in CI
+  failOnWarn: false,     // Default: never fail on warnings
   // failOnWarn: true,   // Always fail on warnings
-  // failOnWarn: false,  // Never fail on warnings
+  // failOnWarn: 'ci-only', // Fail on warnings only in CI
 })
 ```
 
 See [CI Environment](advanced-ci.md) for more about CI-aware options.
+
+## Suppressing Warnings
+
+The `suppressWarnings` option silences warnings whose message matches a given pattern. This is useful for opting out of non-actionable notices (such as the TypeScript 7.0 experimental API warning) while keeping other warnings visible.
+
+### Type
+
+```ts
+suppressWarnings?:
+  | string
+  | RegExp
+  | Array<string | RegExp>
+  | ((msg: string) => boolean)
+```
+
+- **string** – substring match
+- **RegExp** – regular expression match
+- **array** – matches if any entry matches
+- **function** – custom predicate
+
+### Usage
+
+```ts
+export default defineConfig({
+  suppressWarnings: [
+    'is experimental',        // substring match
+    /Circular dependency/,    // regexp match
+  ],
+  // Or a predicate function:
+  // suppressWarnings: (msg) => msg.includes('is experimental'),
+})
+```
+
+Matched warnings are dropped **before** `failOnWarn` is applied, so a suppressed warning will not fail the build even when `failOnWarn: true`.
 
 ## Related Options
 

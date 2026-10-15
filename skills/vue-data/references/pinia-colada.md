@@ -1,4 +1,4 @@
-# Pinia Colada — The Data Fetching Layer for Vue
+# Pinia Colada: The Data Fetching Layer for Vue
 
 > `@pinia/colada` 1.x. Built on Pinia (requires it), tree-shakable core, official devtools support, and the layer `vue-router` Data Loaders integrate with.
 
@@ -49,7 +49,7 @@ const {
 Key rules:
 - **Key = identity.** Everything the query function depends on must appear in the key (like a `computed`'s dependencies). Use a function/getter for reactive keys.
 - Two components using the same key share one cache entry and one in-flight request (dedup).
-- `isPending` (no data at all) vs `asyncStatus === 'loading'` (any fetch in flight, incl. background refresh) — pick the right one for spinners.
+- `isPending` (no data at all) vs `asyncStatus === 'loading'` (any fetch in flight, incl. background refresh). Pick the right one for spinners.
 
 ### Reusable query options
 
@@ -115,5 +115,5 @@ Official plugins cover retries (`@pinia/colada-plugin-retry`), auto-refetch, del
 
 ## vs TanStack Vue Query
 
-- Colada: Vue-first ergonomics, smaller core, Pinia devtools, Data Loaders integration — default choice.
+- Colada: Vue-first ergonomics, smaller core, Pinia devtools, Data Loaders integration. It is the default choice.
 - TanStack: infinite queries, broader ecosystem parity with React, more third-party adapters. Choose it if you need those or share conventions with a React codebase; don't migrate a working TanStack setup.

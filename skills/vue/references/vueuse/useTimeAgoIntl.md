@@ -1,5 +1,6 @@
 ---
 category: Time
+utils: formatTimeAgoIntl
 ---
 
 # useTimeAgoIntl
@@ -63,19 +64,13 @@ export interface FormatTimeAgoIntlOptions {
   units?: TimeAgoUnit[]
 }
 export interface UseTimeAgoIntlOptions<Controls extends boolean>
-  extends FormatTimeAgoIntlOptions {
+  extends FormatTimeAgoIntlOptions, ConfigurableScheduler {
   /**
    * Expose more controls and the raw `parts` result.
    *
    * @default false
    */
   controls?: Controls
-  /**
-   * Update interval in milliseconds, set 0 to disable auto update
-   *
-   * @default 30_000
-   */
-  updateInterval?: number
 }
 type UseTimeAgoReturn<Controls extends boolean = false> = Controls extends true
   ? {

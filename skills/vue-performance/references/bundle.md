@@ -1,13 +1,13 @@
 # Bundle Size (Vite 8 / Rolldown)
 
-## Route-level splitting — the 80% win
+## Route-level splitting: the 80% win
 
 ```ts
 // every route component = dynamic import = its own chunk
 { path: '/admin', component: () => import('@/pages/AdminDashboard.vue') }
 ```
 
-File-based routing (Router 5 / Nuxt) does this automatically. Verify no route accidentally uses a static import — one static import in the route table pulls the page into the entry chunk.
+File-based routing (Router 5 / Nuxt) does this automatically. Verify no route accidentally uses a static import. One static import in the route table pulls the page into the entry chunk.
 
 ## Import hygiene
 
@@ -19,7 +19,7 @@ import dayjs from 'dayjs' + all locales      import 'dayjs/locale/ko' // only ne
 ```
 
 - Icon kits: import individual icons (`unplugin-icons`), never the full set component.
-- Heavy libs used in one interaction (xlsx export, pdf, editors, charts): **dynamic import inside the event handler** — the chunk loads on first click.
+- Heavy libs used in one interaction (xlsx export, pdf, editors, charts): **dynamic import inside the event handler**, so the chunk loads on first click.
 - Check `package.json` `sideEffects` awareness: libraries without ESM builds don't tree-shake; prefer `-es`/modern equivalents (lodash-es, date-fns).
 
 ## Component-level splitting
@@ -52,12 +52,12 @@ export default defineConfig({
 })
 ```
 
-- Goal: stable long-cached vendor chunks vs churning app chunks — not "many small chunks" (HTTP overhead + waterfall).
+- Goal: stable long-cached vendor chunks vs churning app chunks, not "many small chunks" (HTTP overhead + waterfall).
 - `build.reportCompressedSize: true` and budget alerts in CI (`vite build` output, or size-limit) prevent regressions.
 
 ## Assets & CSS
 
-- Images dominate many "JS bundle" complaints — check the network tab first. Use responsive `srcset`/AVIF (Nuxt: `<NuxtImg>`).
+- Images dominate many "JS bundle" complaints. Check the network tab first. Use responsive `srcset`/AVIF (Nuxt: `<NuxtImg>`).
 - Purge unused CSS via the framework (UnoCSS/Tailwind JIT are already minimal); watch out for imported component-library themes (full CSS imports).
 - Fonts: `font-display: swap`, subset, self-host, preload only the one above-the-fold weight.
 

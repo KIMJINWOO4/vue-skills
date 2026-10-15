@@ -5,7 +5,7 @@ category: Component
 # useVirtualList
 
 ::: warning
-Consider using [`vue-virtual-scroller`](https://github.com/Akryum/vue-virtual-scroller) instead, if you are looking for more features.
+Consider using [`@tanstack/vue-virtual`](https://tanstack.com/virtual/v3/docs/framework/vue/vue-virtual) instead, if you are looking for more features.
 :::
 
 Create virtual lists with ease. Virtual lists (sometimes called [_virtual scrollers_](https://vue-virtual-scroller-demo.netlify.app/)) allow you to render a large number of items performantly. They only render the minimum number of DOM nodes necessary to show the items within the `container` element by using the `wrapper` element to emulate the container element's full height.
@@ -112,14 +112,13 @@ const { list, containerProps, wrapperProps } = useVirtualList(
 </template>
 ```
 
-To scroll to a specific element, the component exposes `scrollTo(index: number) => void`.
+To scroll to a specific element, the component exposes `scrollTo(index: number, options?: { behavior?: ScrollBehavior, block?: ScrollLogicalPosition, inline?: ScrollLogicalPosition }) => void`.
 
 ## Type Declarations
 
 ```ts
 type UseVirtualListItemSize = number | ((index: number) => number)
-export interface UseHorizontalVirtualListOptions
-  extends UseVirtualListOptionsBase {
+export interface UseHorizontalVirtualListOptions extends UseVirtualListOptionsBase {
   /**
    * item width, accept a pixel value or a function that returns the width
    *
@@ -127,8 +126,7 @@ export interface UseHorizontalVirtualListOptions
    */
   itemWidth: UseVirtualListItemSize
 }
-export interface UseVerticalVirtualListOptions
-  extends UseVirtualListOptionsBase {
+export interface UseVerticalVirtualListOptions extends UseVirtualListOptionsBase {
   /**
    * item height, accept a pixel value or a function that returns the height
    *
@@ -145,15 +143,19 @@ export interface UseVirtualListOptionsBase {
   overscan?: number
 }
 export type UseVirtualListOptions =
-  | UseHorizontalVirtualListOptions
-  | UseVerticalVirtualListOptions
+  UseHorizontalVirtualListOptions | UseVerticalVirtualListOptions
 export interface UseVirtualListItem<T> {
   data: T
   index: number
 }
+export interface UseVirtualListScrollToOptions {
+  behavior?: ScrollBehavior
+  block?: ScrollLogicalPosition
+  inline?: ScrollLogicalPosition
+}
 export interface UseVirtualListReturn<T> {
   list: Ref<UseVirtualListItem<T>[]>
-  scrollTo: (index: number) => void
+  scrollTo: (index: number, options?: UseVirtualListScrollToOptions) => void
   containerProps: {
     ref: Ref<HTMLElement | null>
     onScroll: () => void

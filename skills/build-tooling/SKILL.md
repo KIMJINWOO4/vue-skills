@@ -1,29 +1,33 @@
 ---
 name: build-tooling
-description: Unified frontend build tooling guide. Vite 8 (Rolldown bundler / dev server), Vitest 4 (testing), tsdown (library bundling), pnpm 11 (package management), Turborepo (monorepos), TypeScript 7 native compiler. Use when working with vite.config.ts, vitest, tsdown.config.ts, pnpm-workspace.yaml, turbo.json, or tsconfig.
+description: Frontend build and test tooling for Vue projects. Vite 8 with Rolldown, Vitest 5, tsdown for libraries, pnpm 12 workspaces and catalogs, Turborepo, and TypeScript 7 with vue-tsc. Use when editing vite.config.ts, vitest.config.ts, tsdown.config.ts, pnpm-workspace.yaml, turbo.json or tsconfig, or when builds, tests or installs fail.
 ---
 
-# Build Tooling Skill
+# Build Tooling
 
-> Baseline as of 2026-07: Vite 8 (Rolldown default) · Vitest 4 (v5 in beta) · pnpm 11 · tsdown 0.22 · Turborepo 2.10 · TypeScript 7 (native compiler).
+Versions checked on 2026-10-15: Vite 8.3, Vitest 5.0, tsdown 0.23, pnpm 12.11, Turborepo 2.11, TypeScript 7.0 (Vue type-checking stays on TypeScript 6, see below).
 
-## Reference Map
+## Reference map
 
-Read the reference for the tool you are working on to load detailed knowledge.
+| Tool | Start here |
+|------|-----------|
+| Vite: config, features, plugin API, SSR, environment API, Rolldown migration | [vite-guide](references/vite-guide.md) |
+| Vitest: config, test API, mocking, coverage, projects, browser mode | [vitest-guide](references/vitest-guide.md) |
+| tsdown: library bundling, declarations, exports, migrating from tsup | [tsdown-guide](references/tsdown-guide.md) |
+| pnpm: CLI, `pnpm-workspace.yaml` settings, catalogs, overrides, patches, supply-chain settings | [pnpm-guide](references/pnpm-guide.md) |
+| Turborepo: tasks, caching, filtering, CI | [turborepo-guide](references/turborepo-guide.md) |
+| TypeScript 7 and vue-tsc | [typescript-7](references/typescript-7.md) |
 
-| Tool | Description | Entry point |
-|------|-------------|-------------|
-| **Vite** | Build config, plugin API, SSR, Rolldown migration | [vite-guide](references/vite-guide.md) → `vite/` |
-| **Vitest** | Unit testing, mocking, coverage, test filtering | [vitest-guide](references/vitest-guide.md) → `vitest/` |
-| **tsdown** | TS/JS library bundling, DTS generation, tsup migration | [tsdown-guide](references/tsdown-guide.md) → `tsdown/` |
-| **pnpm** | Package management, workspaces, catalogs, patches | [pnpm-guide](references/pnpm-guide.md) → `pnpm/` |
-| **Turborepo** | Monorepo build system, tasks, caching, CI | [turborepo-guide](references/turborepo-guide.md) → `turborepo/` |
-| **TypeScript 7** | Native (Go) compiler, migration from TS 5.x, perf notes | [typescript-7](references/typescript-7.md) |
+## Defaults for a new Vue project
 
-## 2026 defaults for new projects
+- Vite 8. Rolldown is the only bundler and Oxc replaces esbuild; most Rollup plugins work unchanged.
+- Vitest 5 with Node 22.12 or newer. Remember `clearMocks` is on by default.
+- pnpm 12 with settings in `pnpm-workspace.yaml` (camelCase keys); `.npmrc` holds only registry and auth settings. Use catalogs for shared versions.
+- Libraries build with tsdown, not tsup.
+- Type-check `.vue` files with `vue-tsc` on TypeScript 6 through the `@typescript/typescript6` alias. TypeScript 7 is fine for packages without `.vue` files.
 
-- Vite 8: Rolldown is the only bundler — no opt-in, no esbuild/Rollup split. Most Rollup plugins work unchanged.
-- Vitest 4 stable; Vitest 5 (beta) tracks Vite 8 — prefer 4.x until 5 stabilizes.
-- pnpm 11 with workspace catalogs for version consistency.
-- Libraries: tsdown (Rolldown-based) instead of tsup.
-- Type-checking: TypeScript 7 (`tsgo`) — ~10x faster; keep 5.x/6.x only if a toolchain dependency requires the JS API.
+## Version-matched docs first
+
+When the installed package ships its own docs, prefer them over these references because they match the exact version. Turborepo does this: read `node_modules/turbo/docs/README.md` first (resolve the path with `node -p "require.resolve('turbo/package.json')"` in pnpm workspaces). The Turborepo references here are the last offline snapshot, kept for machines without the package installed.
+
+Upgrade steps for each tool are in the `vue-upgrade` skill.

@@ -28,7 +28,9 @@ export default defineConfig({
   entry: ['./src/index.ts'],
   format: ['esm', 'cjs'],
   platform: 'neutral',
-  external: ['react', 'react-dom'],
+  deps: {
+    neverBundle: ['react', 'react-dom'],
+  },
   dts: true,
 })
 ```
@@ -97,32 +99,29 @@ export default defineConfig({
 
 ## React Compiler
 
-React Compiler automatically optimizes React code at build time.
+React Compiler automatically optimizes React code at build time. It is currently available only as a Babel plugin. You can scaffold the `react-compiler` starter template (`npx create-tsdown@latest -t react-compiler`) or integrate it manually.
 
 ### Install Dependencies
 
 ```bash
-pnpm add -D @rollup/plugin-babel babel-plugin-react-compiler
+pnpm add -D @rolldown/plugin-babel @vitejs/plugin-react
 ```
 
 ### Configure
 
 ```ts
-import pluginBabel from '@rollup/plugin-babel'
+import pluginBabel from '@rolldown/plugin-babel'
+import { reactCompilerPreset } from '@vitejs/plugin-react'
 
 export default defineConfig({
   entry: ['src/index.tsx'],
   format: ['esm', 'cjs'],
-  external: ['react', 'react-dom'],
+  deps: {
+    neverBundle: ['react', 'react-dom'],
+  },
   plugins: [
     pluginBabel({
-      babelHelpers: 'bundled',
-      parserOpts: {
-        sourceType: 'module',
-        plugins: ['jsx', 'typescript'],
-      },
-      plugins: ['babel-plugin-react-compiler'],
-      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      presets: [reactCompilerPreset()],
     }),
   ],
   dts: true,
@@ -138,11 +137,13 @@ export default defineConfig({
   entry: ['src/index.ts'],
   format: ['esm', 'cjs'],
   platform: 'neutral',
-  external: [
-    'react',
-    'react-dom',
-    /^react\//,  // react/jsx-runtime, etc.
-  ],
+  deps: {
+    neverBundle: [
+      'react',
+      'react-dom',
+      /^react\//,  // react/jsx-runtime, etc.
+    ],
+  },
   dts: true,
   clean: true,
 })
@@ -159,7 +160,9 @@ export default defineConfig({
     Modal: 'src/Modal.tsx',
   },
   format: ['esm', 'cjs'],
-  external: ['react', 'react-dom'],
+  deps: {
+    neverBundle: ['react', 'react-dom'],
+  },
   dts: true,
 })
 ```
@@ -171,7 +174,9 @@ export default defineConfig({
   entry: ['src/index.ts'],
   format: ['esm', 'cjs'],
   platform: 'neutral',
-  external: ['react'],  // Only React needed
+  deps: {
+    neverBundle: ['react'],  // Only React needed
+  },
   dts: true,
   treeshake: true,
 })
@@ -184,11 +189,13 @@ export default defineConfig({
   workspace: 'packages/*',
   entry: ['src/index.ts'],
   format: ['esm', 'cjs'],
-  external: [
-    'react',
-    'react-dom',
-    /^@mycompany\//,  // Other workspace packages
-  ],
+  deps: {
+    neverBundle: [
+      'react',
+      'react-dom',
+      /^@mycompany\//,  // Other workspace packages
+    ],
+  },
   dts: true,
 })
 ```
@@ -257,7 +264,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig((options) => ({
   entry: ['src/index.ts'],
   format: ['esm'],
-  external: ['react', 'react-dom'],
+  deps: {
+    neverBundle: ['react', 'react-dom'],
+  },
   plugins: options.watch
     ? [
         // @ts-expect-error Vite plugin
@@ -284,7 +293,9 @@ export default defineConfig((options) => ({
 Ensure React is externalized:
 
 ```ts
-external: ['react', 'react-dom', /^react\//]
+deps: {
+  neverBundle: ['react', 'react-dom', /^react\//],
+}
 ```
 
 ### Type Errors with JSX
@@ -301,15 +312,17 @@ Check `tsconfig.json`:
 
 ### Duplicate React
 
-Add to external patterns:
+Add to deps.neverBundle:
 
 ```ts
-external: [
-  'react',
-  'react-dom',
-  'react/jsx-runtime',
-  'react/jsx-dev-runtime',
-]
+deps: {
+  neverBundle: [
+    'react',
+    'react-dom',
+    'react/jsx-runtime',
+    'react/jsx-dev-runtime',
+  ],
+}
 ```
 
 ## Related

@@ -12,7 +12,7 @@
 <select v-model="selected" multiple>    <!-- array -->
 ```
 
-- `v-model.number` yields `''` when the field is cleared — normalize before submitting.
+- `v-model.number` yields `''` when the field is cleared, so normalize before submitting.
 - Checkbox groups bind an array; radio groups bind the `value` of the checked input.
 
 ## Custom form controls with `defineModel`
@@ -47,11 +47,11 @@ const id = useId()   // Vue 3.5+ stable SSR-safe id
 - `defineModel` replaces the `modelValue` prop + `update:modelValue` emit boilerplate; it is writable locally and syncs to the parent.
 - Named models: `defineModel<string>('firstName')` → `v-model:first-name`.
 - Modifiers: `const [model, modifiers] = defineModel({ set(v) { return modifiers.trim ? v.trim() : v } })`.
-- **Never** copy a prop into a local ref and watch-sync both directions — that's the bug `defineModel` exists to prevent.
+- **Never** copy a prop into a local ref and watch-sync both directions. That's the bug `defineModel` exists to prevent.
 
 ## A minimal validation composable
 
-For small forms, this is all you need — resist the library reflex:
+For small forms, this is all you need. Resist the library reflex:
 
 ```ts
 // useValidation.ts
@@ -116,6 +116,6 @@ async function onSubmit() {
 ```
 
 Notes:
-- `@submit.prevent` on the `<form>`, `type="submit"` on the button — Enter-to-submit works for free.
+- With `@submit.prevent` on the `<form>` and `type="submit"` on the button, Enter-to-submit works for free.
 - `novalidate` disables inconsistent native browser bubbles while keeping semantic validation attributes available.
 - Outgrowing this (cross-field rules, async rules, arrays)? Move to VeeValidate + Zod, don't grow the composable into a framework.

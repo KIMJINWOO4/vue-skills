@@ -1,0 +1,40 @@
+name: Sync upstream
+
+# Pulls the latest upstream skill content every Monday and opens a pull request.
+# Nothing is pushed to main without review. Pinned sources in sources.json stay put.
+# Requires "Allow GitHub Actions to create and approve pull requests" in the repo settings.
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Sync unpinned sources to their branch heads
+        run: node scripts/sync.mjs --update
+      - name: Validate
+        run: node scripts/validate.mjs
+      - name: Refresh the stats table in README
+        run: node scripts/stats.mjs --write
+      - uses: peter-evans/create-pull-request@v8
+        with:
+          branch: sync/upstream
+          delete-branch: true
+          commit-message: 'chore: sync upstream skills'
+          title: 'chore: sync upstream skills'
+          body: |
+            Automated weekly sync from the sources in `sources.json`.
+
+            Review the diff of `sources.json` for the commits that moved, then skim the changed references.
+            Hand-written files are never touched by this job.

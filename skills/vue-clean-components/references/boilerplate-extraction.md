@@ -18,7 +18,7 @@ const { refetch } = useGridRowQuery(payload, false, { forceRefresh: true });
 
 | Repetitions | Action |
 |-------------|--------|
-| 1 | Never extract — premature abstraction |
+| 1 | Never extract (premature abstraction) |
 | 2 | Tolerate unless pattern > 15 lines |
 | 3+ | Extract composable or shared utility |
 

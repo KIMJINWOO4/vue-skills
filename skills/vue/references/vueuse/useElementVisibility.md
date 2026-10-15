@@ -15,11 +15,18 @@ import { useTemplateRef } from 'vue'
 
 const target = useTemplateRef('target')
 const targetIsVisible = useElementVisibility(target)
+
+const target2 = useTemplateRef('target2')
+const targetVisibilityController = useElementVisibility(target2, { controls: true })
 </script>
 
 <template>
   <div ref="target">
     <h1>Hello world</h1>
+  </div>
+
+  <div ref="target2">
+    <h1>Hi there</h1>
   </div>
 </template>
 ```
@@ -47,6 +54,38 @@ const targetIsVisible = useElementVisibility(target, {
 })
 ```
 
+### controls
+
+By default `useElementVisibility` returns a `ShallowRef<boolean>`. Set `controls: true` to receive the visibility ref together with the controls of the underlying `useIntersectionObserver`:
+
+```ts
+import { useElementVisibility } from '@vueuse/core'
+// ---cut---
+const { isVisible, isActive, pause, resume, stop, isSupported } = useElementVisibility(target, {
+  controls: true,
+})
+```
+
+| State         | Type                   | Description                                                                                                                  |
+| ------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `isVisible`   | `ShallowRef<boolean>`  | Whether the target is currently visible in the viewport.                                                                     |
+| `isActive`    | `ShallowRef<boolean>`  | Whether the observer is currently running. Turns `false` once the observer is stopped, for example after `once: true` fires. |
+| `isSupported` | `ComputedRef<boolean>` | Whether the `IntersectionObserver` API is available.                                                                         |
+| `pause`       | `() => void`           | Pause observing and set `isActive` to `false`.                                                                               |
+| `resume`      | `() => void`           | Resume observing.                                                                                                            |
+| `stop`        | `() => void`           | Stop observing permanently.                                                                                                  |
+
+With `once: true`, read `isActive` to tell whether tracking has already stopped after the element first became visible:
+
+```ts
+import { useElementVisibility } from '@vueuse/core'
+// ---cut---
+const { isVisible, isActive } = useElementVisibility(target, {
+  controls: true,
+  once: true,
+})
+```
+
 ## Component Usage
 
 ```vue
@@ -70,6 +109,16 @@ const isVisible = shallowRef(false)
 function onElementVisibility(state) {
   isVisible.value = state
 }
+
+const target2 = useTemplateRef('target2')
+const isVisible2 = shallowRef(false)
+
+function onElementVisibilityWithControls(state) {
+  isVisible2.value = state.isVisible.value
+  if (state.isVisible.value) {
+    state.stop()
+  }
+}
 </script>
 
 <template>
@@ -83,15 +132,23 @@ function onElementVisibility(state) {
       {{ isVisible ? 'inside' : 'outside' }}
     </div>
   </div>
+
+  <!-- with controls -->
+  <div ref="target2">
+    <div v-element-visibility="[onElementVisibilityWithControls, { controls: true }]">
+      {{ isVisible2 ? 'inside' : 'outside' }}
+    </div>
+  </div>
 </template>
 ```
 
 ## Type Declarations
 
 ```ts
-export interface UseElementVisibilityOptions
-  extends ConfigurableWindow,
-    Pick<UseIntersectionObserverOptions, "threshold"> {
+export interface UseElementVisibilityOptions<Controls extends boolean = false>
+  extends
+    ConfigurableWindow,
+    Pick<UseIntersectionObserverOptions, "rootMargin" | "threshold"> {
   /**
    * Initial value.
    *
@@ -99,19 +156,28 @@ export interface UseElementVisibilityOptions
    */
   initialValue?: boolean
   /**
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/rootMargin
-   */
-  rootMargin?: MaybeRefOrGetter<string>
-  /**
    * The element that is used as the viewport for checking visibility of the target.
    */
-  scrollTarget?: MaybeRefOrGetter<HTMLElement | undefined | null>
+  scrollTarget?: UseIntersectionObserverOptions["root"]
   /**
    * Stop tracking when element visibility changes for the first time
    *
    * @default false
    */
   once?: boolean
+  /**
+   * Expose more controls
+   *
+   * @default false
+   */
+  controls?: Controls
+}
+export type UseElementVisibilityReturn<Controls extends boolean = false> =
+  Controls extends true
+    ? UseElementVisibilityReturnWithControls
+    : ShallowRef<boolean>
+export interface UseElementVisibilityReturnWithControls extends UseIntersectionObserverReturn {
+  isVisible: ShallowRef<boolean>
 }
 /**
  * Tracks the visibility of an element within the viewport.
@@ -120,7 +186,10 @@ export interface UseElementVisibilityOptions
  */
 export declare function useElementVisibility(
   element: MaybeComputedElementRef,
-  options?: UseElementVisibilityOptions,
-): ShallowRef<boolean, boolean>
-export type UseElementVisibilityReturn = ReturnType<typeof useElementVisibility>
+  options?: UseElementVisibilityOptions<false>,
+): UseElementVisibilityReturn<false>
+export declare function useElementVisibility(
+  element: MaybeComputedElementRef,
+  options?: UseElementVisibilityOptions<true>,
+): UseElementVisibilityReturn<true>
 ```
