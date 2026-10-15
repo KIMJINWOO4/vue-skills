@@ -122,7 +122,7 @@ At the start of each session an agent loads the name and description of every in
 | `vitepress` | 42 | 14 | 59 KB |
 | `vue` | 91 | 351 | 1013 KB |
 | `vue-a11y` | 89 | 3 | 12 KB |
-| `vue-clean-components` | 86 | 7 | 16 KB |
+| `vue-clean-components` | 86 | 7 | 15 KB |
 | `vue-data` | 87 | 3 | 10 KB |
 | `vue-debug` | 106 | 141 | 596 KB |
 | `vue-forms` | 78 | 16 | 46 KB |

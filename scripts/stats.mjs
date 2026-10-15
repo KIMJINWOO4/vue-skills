@@ -33,7 +33,8 @@ const rows = readdirSync(skillsDir)
   .map((name) => {
     const dir = join(skillsDir, name)
     const refs = walk(dir).filter(f => f.endsWith('.md') && !f.endsWith('SKILL.md'))
-    const bytes = refs.reduce((sum, f) => sum + statSync(f).size, 0)
+    // Count LF-normalized bytes so Windows (CRLF) and CI (LF) checkouts print the same table.
+    const bytes = refs.reduce((sum, f) => sum + Buffer.byteLength(readFileSync(f, 'utf8').replace(/\r\n/g, '\n')), 0)
     return { name, startup: tokens(startupText(join(dir, 'SKILL.md'))), refs: refs.length, kb: Math.round(bytes / 1024) }
   })
 
