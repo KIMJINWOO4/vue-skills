@@ -2,7 +2,7 @@
 
 Agent skills for Vue 3, Nuxt and the Vite toolchain. Works with Claude Code and any agent that reads `SKILL.md` folders.
 
-**Last updated: October 15, 2026.** Versions were checked against npm and the release notes on that date.
+**Last updated: October 15, 2026.** Every version number below matches npm and the release notes as of that date.
 
 [![Validate](https://github.com/KIMJINWOO4/vue-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/KIMJINWOO4/vue-skills/actions/workflows/validate.yml)
 ![Updated](https://img.shields.io/badge/updated-2026--10--15-42b883)
@@ -11,14 +11,14 @@ Agent skills for Vue 3, Nuxt and the Vite toolchain. Works with Claude Code and 
 
 ## Why this collection
 
-Good Vue skills already exist, spread over a dozen repositories: Anthony Fu's generated docs, the Vue team's best practices, the VueUse function map, official skills from Nuxt UI, tsdown and Regle. Installing them one by one gives an agent 29 descriptions to choose from, several covering the same ground (`vue`, `vue-best-practices`, `vue-debug-guides`, `pinia`, `vue-pinia-best-practices` and so on), and no shared baseline date.
+Good Vue skills already exist in about a dozen repositories, including Anthony Fu's generated docs, the Vue team's best practices, the VueUse function map, and official skills from Nuxt UI, tsdown and Regle. If you install them one by one, your agent sees 29 descriptions, and several of them cover the same topic (`vue`, `vue-best-practices`, `vue-debug-guides`, `pinia`, `vue-pinia-best-practices`). Each one was also written against a different set of versions.
 
-This repository folds them into 16 skills, each with one clear trigger, and adds the parts nobody else covers:
+This repository merges them into 16 skills that each answer a different kind of request. It also adds content you will not find upstream.
 
-- **Traceable.** Every synced file comes from an upstream commit recorded in [`sources.json`](sources.json). `node scripts/sync.mjs` reproduces the tree, and a weekly action opens a pull request when upstream moves.
-- **Checked against releases.** Version claims carry the date they were checked and link the release notes. Where upstream docs run ahead of or behind the packages people actually install, this repo says so (see [What the October review found](#what-the-october-review-found)).
-- **Validated.** CI checks frontmatter, size budgets and every relative link across about 800 reference files. Upstream links that break when copied are repaired during sync.
-- **Gaps filled.** A console-message index for debugging, a code review checklist and upgrade guides are written for this repo, along with skills for data fetching, forms, performance, accessibility and component structure.
+- Every synced file comes from an upstream commit recorded in [`sources.json`](sources.json). Running `node scripts/sync.mjs` rebuilds the same tree, and a weekly GitHub Action opens a pull request when an upstream repository changes.
+- Version numbers come with the date they were checked and a link to the release notes. When an upstream doc describes a release that does not exist yet, or one that is already out of date, this README lists it in [What the October review found](#what-the-october-review-found).
+- CI checks the frontmatter, the size of each `SKILL.md` and every relative link in about 800 reference files. The sync script fixes upstream links that would break after copying.
+- The repository adds its own skills for debugging by console message, code review, version upgrades, data fetching, forms, performance, accessibility and component structure.
 
 ## Skills
 
@@ -43,22 +43,26 @@ This repository folds them into 16 skills, each with one clear trigger, and adds
 
 ## Install
 
-The skills link to each other (for example, `vue-review` points into `vue-debug`), so installing the whole set works best.
+The skills link to each other. For example, `vue-review` links to guides in `vue-debug`. Install the whole set so those links resolve.
 
-**Claude Code plugin**
+### Claude Code plugin
 
 ```
 /plugin marketplace add KIMJINWOO4/vue-skills
 /plugin install vue-skills@vue-skills
 ```
 
-**skills CLI** (Claude Code, Cursor, Codex, OpenCode and other agents)
+### skills CLI
+
+Works with Claude Code, Cursor, Codex, OpenCode and other agents.
 
 ```bash
 npx skills add KIMJINWOO4/vue-skills --skill='*'
 ```
 
-**As a project dependency** with [skills-npm](https://github.com/antfu/skills-npm), so the whole team gets the same skills on install. Add the source to `package.json`:
+### As a project dependency
+
+With [skills-npm](https://github.com/antfu/skills-npm), everyone on the team gets the same skills when they run `npm install`. Add the source to `package.json`:
 
 ```json
 {
@@ -66,9 +70,9 @@ npx skills add KIMJINWOO4/vue-skills --skill='*'
 }
 ```
 
-Then run `npx skills-npm setup` once. Pin a commit with `"KIMJINWOO4/vue-skills#<sha>"` if you want reproducible content.
+Then run `npx skills-npm setup` once. To get the same content on every machine, pin a commit with `"KIMJINWOO4/vue-skills#<sha>"`.
 
-**Manual copy**
+### Manual copy
 
 ```bash
 git clone https://github.com/KIMJINWOO4/vue-skills.git
@@ -77,13 +81,13 @@ cp -r vue-skills/skills/* your-project/.claude/skills/
 
 ## What the October review found
 
-Five things an agent would get wrong from older notes or from the latest upstream docs:
+Older notes and some of the newest upstream docs would lead an agent to get these five things wrong.
 
-1. **TypeScript 7 breaks `vue-tsc`.** TS 7.0 (July 2026) ships without the JavaScript compiler API that Volar needs. Keep `"typescript": "npm:@typescript/typescript6@^6.0.2"` for Vue type-checking until vue-tsc supports TS 7.1. [Details](skills/build-tooling/references/typescript-7.md)
-2. **Vapor Mode no longer delegates events by default.** Since Vue 3.6.0-rc.2, delegation is opt-in with `@click.delegate`, and `compilerOptions.eventDelegation` was removed. [Details](skills/vue/references/vue-36-vapor.md)
-3. **The newest generated Nuxt docs describe Nuxt 5, which is not released.** antfu/skills regenerated its Nuxt and VitePress skills from main branches in September. This repo pins those two to the previous generation (Nuxt 4.x, VitePress 1.x) and covers Nuxt 5 as preparation work. [Details](sources.json)
-4. **Turborepo moved its docs into the npm package.** `node_modules/turbo/docs` now matches the installed version exactly, so `build-tooling` reads it first and keeps the offline snapshot as a fallback.
-5. **VueUse 15 removed `templateRef` and changed `useThrottleFn`.** `trailing` now defaults to `true`, and timer options moved to `scheduler`. [Details](skills/vue-upgrade/references/vueuse-15.md)
+1. `vue-tsc` does not work with TypeScript 7. TS 7.0 shipped in July 2026 without the JavaScript compiler API that Volar needs. Keep `"typescript": "npm:@typescript/typescript6@^6.0.2"` for Vue type-checking until vue-tsc supports TS 7.1. [Details](skills/build-tooling/references/typescript-7.md)
+2. Vapor Mode no longer delegates events by default. Since Vue 3.6.0-rc.2 you opt in per listener with `@click.delegate`, and the `compilerOptions.eventDelegation` option is gone. [Details](skills/vue/references/vue-36-vapor.md)
+3. The newest generated Nuxt docs describe Nuxt 5, which is not released. In September antfu/skills regenerated its Nuxt and VitePress skills from the main branches. This repository keeps those two at the previous generation, which documents Nuxt 4.x and VitePress 1.x, and treats Nuxt 5 as preparation work. [Details](sources.json)
+4. Turborepo now ships its docs inside the npm package. `node_modules/turbo/docs` always matches the installed version, so `build-tooling` tells the agent to read it first and uses the offline copy only when the package is not installed.
+5. VueUse 15 removed `templateRef`, and `useThrottleFn` now defaults `trailing` to `true`. Timer options such as `interval` moved to a `scheduler` option. [Details](skills/vue-upgrade/references/vueuse-15.md)
 
 ## Versions covered
 
@@ -105,7 +109,7 @@ The full table with Node and peer floors is in [`vue-upgrade/references/versions
 
 ## Startup cost
 
-Agents load every installed skill's name and description at the start of each session, then read `SKILL.md` and references only when a task needs them. Measured with `node scripts/stats.mjs` (tokens estimated as characters divided by 4):
+At the start of each session an agent loads the name and description of every installed skill. It reads `SKILL.md` and the references only when a task needs them. `node scripts/stats.mjs` produces the table below and estimates tokens as characters divided by 4.
 
 <!-- stats:start -->
 | Skill | Startup tokens | Reference files | Reference size |
@@ -133,22 +137,18 @@ Installing the 29 upstream skills bundled here one by one would load 29 descript
 
 ## How it stays current
 
-```
-sources.json  →  scripts/sync.mjs  →  skills/**     (upstream content, pinned by commit)
-                                     + hand-written  (SKILL.md files, vue-review, vue-upgrade, ...)
-scripts/validate.mjs  →  CI on every push and pull request
-.github/workflows/sync.yml  →  weekly pull request when upstream changes
-```
+Two kinds of files live under `skills/`.
 
-- Upstream content: antfu/skills, vuejs-ai/skills, vueuse/skills, rolldown/tsdown, vercel/turborepo, nuxt/ui, onmax/nuxt-skills, Regle, Vercel's Web Interface Guidelines and find-skills, and Anthropic's frontend-design. Each copy rule lives in `sources.json`.
-- A source can be pinned with a reason (`"pin": true`) when its newest content documents unreleased versions.
-- The date at the top of this README is the last full review of the hand-written skills.
+- Synced files. `sources.json` lists each upstream repository, the commit to copy from and where each file goes, and `scripts/sync.mjs` copies them. The sources are antfu/skills, vuejs-ai/skills, vueuse/skills, rolldown/tsdown, vercel/turborepo, nuxt/ui, onmax/nuxt-skills, Regle, Vercel's Web Interface Guidelines and find-skills, and Anthropic's frontend-design.
+- Hand-written files. Most `SKILL.md` files, plus the references of `vue-review`, `vue-upgrade`, `vue-data`, `vue-forms`, `vue-performance`, `vue-a11y` and `vue-clean-components`.
+
+`scripts/validate.mjs` runs in CI on every push and pull request. Every Monday, `.github/workflows/sync.yml` moves the synced sources to their latest commit and opens a pull request if anything changed. A source marked `"pin": true` stays at its commit, which is how the Nuxt and VitePress docs stay on released versions. The date at the top of this README is the last time the hand-written skills were reviewed against new releases.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) to run the scripts or add a source, and [CHANGELOG.md](CHANGELOG.md) for what changed.
 
 ## Credits
 
-This collection stands on the work of [Anthony Fu](https://github.com/antfu) ([antfu/skills](https://github.com/antfu/skills)), the [vuejs-ai](https://github.com/vuejs-ai/skills) maintainers, [SerKo](https://github.com/serkodev) and the [VueUse](https://github.com/vueuse/skills) team, [onmax](https://github.com/onmax/nuxt-skills), the [Nuxt UI](https://github.com/nuxt/ui), [tsdown](https://github.com/rolldown/tsdown), [Turborepo](https://github.com/vercel/turborepo) and [Regle](https://github.com/victorgarciaesgi/regle) teams, [Vercel Labs](https://github.com/vercel-labs) and [Anthropic](https://github.com/anthropics/skills). `vue-clean-components` builds on Michael Thiessen's Clean Components Toolkit and the toss.tech Core-Adapter pattern. ARIA patterns follow the [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/).
+This collection is built from the work of [Anthony Fu](https://github.com/antfu) ([antfu/skills](https://github.com/antfu/skills)), the [vuejs-ai](https://github.com/vuejs-ai/skills) maintainers, [SerKo](https://github.com/serkodev) and the [VueUse](https://github.com/vueuse/skills) team, [onmax](https://github.com/onmax/nuxt-skills), the [Nuxt UI](https://github.com/nuxt/ui), [tsdown](https://github.com/rolldown/tsdown), [Turborepo](https://github.com/vercel/turborepo) and [Regle](https://github.com/victorgarciaesgi/regle) teams, [Vercel Labs](https://github.com/vercel-labs) and [Anthropic](https://github.com/anthropics/skills). `vue-clean-components` builds on Michael Thiessen's Clean Components Toolkit and the toss.tech Core-Adapter pattern. ARIA patterns follow the [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/).
 
 ## License
 
