@@ -168,6 +168,16 @@
       "copy": [
         { "from": "skills/find-skills", "to": "skills/find-skills" }
       ]
+    },
+    {
+      "id": "vue-skills-ci",
+      "repo": "https://github.com/KIMJINWOO4/vue-skills-ci",
+      "branch": "main",
+      "commit": "a7c36ac1c1a7b54a15ff6c96dde8b9e4f5e1e09d",
+      "license": "MIT",
+      "copy": [
+        { "from": "skills/vue-ci", "to": "skills/vue-ci" }
+      ]
     }
   ]
 }

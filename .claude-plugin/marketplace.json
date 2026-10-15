@@ -12,7 +12,7 @@
       "name": "vue-skills",
       "source": "./",
       "version": "2026.10.15",
-      "description": "16 skills for Vue 3, Vapor Mode, Pinia, Vue Router, VueUse, Nuxt, Vite, Vitest, debugging, code review, upgrades, forms, data fetching, performance, accessibility and UI libraries",
+      "description": "17 skills for Vue 3, Vapor Mode, Pinia, Vue Router, VueUse, Nuxt, Vite, Vitest, debugging, code review, upgrades, CI, forms, data fetching, performance, accessibility and UI libraries",
       "keywords": ["vue", "nuxt", "vite", "vitest", "pinia", "vue-router", "vueuse", "vapor", "pnpm", "unocss", "reka-ui", "nuxt-ui"],
       "category": "frontend"
     }

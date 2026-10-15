@@ -6,14 +6,14 @@ Agent skills for Vue 3, Nuxt and the Vite toolchain. Works with Claude Code and 
 
 [![Validate](https://github.com/KIMJINWOO4/vue-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/KIMJINWOO4/vue-skills/actions/workflows/validate.yml)
 ![Updated](https://img.shields.io/badge/updated-2026--10--15-42b883)
-![Skills](https://img.shields.io/badge/skills-16-35495e)
+![Skills](https://img.shields.io/badge/skills-17-35495e)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 ## Why this collection
 
 Good Vue skills already exist in about a dozen repositories, including Anthony Fu's generated docs, the Vue team's best practices, the VueUse function map, and official skills from Nuxt UI, tsdown and Regle. If you install them one by one, your agent sees 29 descriptions, and several of them cover the same topic (`vue`, `vue-best-practices`, `vue-debug-guides`, `pinia`, `vue-pinia-best-practices`). Each one was also written against a different set of versions.
 
-This repository merges them into 16 skills that each answer a different kind of request. It also adds content you will not find upstream.
+This repository merges them into 17 skills that each answer a different kind of request. It also adds content you will not find upstream.
 
 - Every synced file comes from an upstream commit recorded in [`sources.json`](sources.json). Running `node scripts/sync.mjs` rebuilds the same tree, and a weekly GitHub Action opens a pull request when an upstream repository changes.
 - Version numbers come with the date they were checked and a link to the release notes. When an upstream doc describes a release that does not exist yet, or one that is already out of date, this README lists it in [What the October review found](#what-the-october-review-found).
@@ -39,6 +39,7 @@ This repository merges them into 16 skills that each answer a different kind of 
 | [`design`](skills/design/SKILL.md) | Visual design and UI review | Design direction, Web Interface Guidelines, UnoCSS |
 | [`vitepress`](skills/vitepress/SKILL.md) | Documentation sites | VitePress 1.x |
 | [`antfu`](skills/antfu/SKILL.md) | Anthony Fu's project conventions | ESLint config, pnpm catalogs, knip, publishing |
+| [`vue-ci`](skills/vue-ci/SKILL.md) | Checking a project or setting up CI | Runs [vue-skills-ci](https://github.com/KIMJINWOO4/vue-skills-ci), fixes its findings, writes the GitHub Actions workflow |
 | [`find-skills`](skills/find-skills/SKILL.md) | Finding other skills | skills CLI search |
 
 ## Install
@@ -78,6 +79,20 @@ Then run `npx skills-npm setup` once. To get the same content on every machine, 
 git clone https://github.com/KIMJINWOO4/vue-skills.git
 cp -r vue-skills/skills/* your-project/.claude/skills/
 ```
+
+## Run the rules in CI
+
+The checks that can be automated live in a companion repository, [vue-skills-ci](https://github.com/KIMJINWOO4/vue-skills-ci): a reusable GitHub Actions workflow that installs, lints, type-checks, tests and builds a Vue or Nuxt project, plus 19 rules for the version and safety problems described in these skills. Every finding links back to the guide here that explains it.
+
+```yaml
+jobs:
+  vue:
+    uses: KIMJINWOO4/vue-skills-ci/.github/workflows/vue-ci.yml@v1
+```
+
+![Rule findings from vue-skills-ci on a GitHub Actions run](https://raw.githubusercontent.com/KIMJINWOO4/vue-skills-ci/main/docs/images/annotations.png)
+
+The `vue-ci` skill lets an agent run the same checks and fix what they report.
 
 ## What the October review found
 
@@ -122,6 +137,7 @@ At the start of each session an agent loads the name and description of every in
 | `vitepress` | 42 | 14 | 59 KB |
 | `vue` | 91 | 351 | 1013 KB |
 | `vue-a11y` | 89 | 3 | 12 KB |
+| `vue-ci` | 110 | 1 | 12 KB |
 | `vue-clean-components` | 86 | 7 | 15 KB |
 | `vue-data` | 87 | 3 | 10 KB |
 | `vue-debug` | 106 | 141 | 596 KB |
@@ -130,16 +146,16 @@ At the start of each session an agent loads the name and description of every in
 | `vue-review` | 98 | 1 | 6 KB |
 | `vue-ui` | 105 | 67 | 205 KB |
 | `vue-upgrade` | 90 | 9 | 21 KB |
-| **Total (16 skills)** | **1376** | **801** | **2.8 MB** |
+| **Total (17 skills)** | **1486** | **802** | **2.8 MB** |
 
-Installing the 29 upstream skills bundled here one by one would load 29 descriptions, about 1621 tokens, at every session start. This repo loads 16 descriptions, about 1376 tokens, and that already includes the hand-written workflow skills.
+Installing the 30 upstream skills bundled here one by one would load 30 descriptions, about 1731 tokens, at every session start. This repo loads 17 descriptions, about 1486 tokens, and that already includes the hand-written workflow skills.
 <!-- stats:end -->
 
 ## How it stays current
 
 Two kinds of files live under `skills/`.
 
-- Synced files. `sources.json` lists each upstream repository, the commit to copy from and where each file goes, and `scripts/sync.mjs` copies them. The sources are antfu/skills, vuejs-ai/skills, vueuse/skills, rolldown/tsdown, vercel/turborepo, nuxt/ui, onmax/nuxt-skills, Regle, Vercel's Web Interface Guidelines and find-skills, and Anthropic's frontend-design.
+- Synced files. `sources.json` lists each upstream repository, the commit to copy from and where each file goes, and `scripts/sync.mjs` copies them. The sources are antfu/skills, vuejs-ai/skills, vueuse/skills, rolldown/tsdown, vercel/turborepo, nuxt/ui, onmax/nuxt-skills, Regle, Vercel's Web Interface Guidelines and find-skills, Anthropic's frontend-design, and the `vue-ci` skill from vue-skills-ci.
 - Hand-written files. Most `SKILL.md` files, plus the references of `vue-review`, `vue-upgrade`, `vue-data`, `vue-forms`, `vue-performance`, `vue-a11y` and `vue-clean-components`.
 
 `scripts/validate.mjs` runs in CI on every push and pull request. Every Monday, `.github/workflows/sync.yml` moves the synced sources to their latest commit and opens a pull request if anything changed. A source marked `"pin": true` stays at its commit, which is how the Nuxt and VitePress docs stay on released versions. The date at the top of this README is the last time the hand-written skills were reviewed against new releases.

@@ -10,6 +10,7 @@ Versions re-checked against npm and release notes. Every synced file now traces 
 - `vue-review`: a prioritized review checklist for Vue and Nuxt diffs with a `file:line` report format.
 - `vue-upgrade`: upgrade guides for Vue 2 to 3, Vue 3.6, Pinia 4, VueUse 15, Vite 8, Vitest 5, Nuxt 4.6 and Nuxt 5 prep, pnpm 12, and a version table with Node and peer floors.
 - `vue-ui`: Reka UI primitives (onmax/nuxt-skills) and the official Nuxt UI 4 skill.
+- `vue-ci`: synced from the new companion repository [vue-skills-ci](https://github.com/KIMJINWOO4/vue-skills-ci), which turns the automatable checks from these skills into a reusable GitHub Actions workflow and 19 rules.
 
 ### Updated content
 
@@ -24,7 +25,7 @@ Versions re-checked against npm and release notes. Every synced file now traces 
 
 ### Repository
 
-- `scripts/sync.mjs` and `sources.json`: reproducible sync from 12 upstream sources at pinned commits, with fixes for upstream links that point outside the copied folders.
+- `scripts/sync.mjs` and `sources.json`: reproducible sync from 13 upstream sources at pinned commits, with fixes for upstream links that point outside the copied folders.
 - `scripts/validate.mjs`: frontmatter, size budgets, broken links and unreachable files. Runs in CI on every push and pull request.
 - `scripts/stats.mjs`: measured startup token cost per skill, written into the README.
 - Weekly GitHub Action that opens a pull request with upstream changes.

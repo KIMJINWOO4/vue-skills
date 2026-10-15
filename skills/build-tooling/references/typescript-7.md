@@ -22,7 +22,7 @@ Running `vue-tsc` 3.3.x against `typescript@7` fails with an exports error about
 }
 ```
 
-The alias keeps the `typescript` package name that `vue-tsc` and editors resolve, while pinning the version to 6.
+The alias keeps the `typescript` package name that `vue-tsc` and editors resolve, while pinning the version to 6. This setup is tested: the [example app in vue-skills-ci](https://github.com/KIMJINWOO4/vue-skills-ci/tree/main/example) runs `vue-tsc --build` 3.3.13 on `@typescript/typescript6` 6.0.2 in CI.
 
 Optional speedup for large repos: also install the native compiler for `.ts`-only packages (libraries, server code, scripts) and run it next to `vue-tsc`. Keep `vue-tsc` as the check that covers `.vue` files.
 
