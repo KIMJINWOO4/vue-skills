@@ -1,4 +1,4 @@
-<!-- Synced from vuejs-ai/skills@c9d355f:skills/vue-router-best-practices/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from vuejs-ai/skills@b3c62de:skills/vue-router-best-practices/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 Vue Router best practices, common gotchas, and navigation patterns.
 

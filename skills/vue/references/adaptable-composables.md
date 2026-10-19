@@ -1,4 +1,4 @@
-<!-- Synced from vuejs-ai/skills@c9d355f:skills/create-adaptable-composable/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from vuejs-ai/skills@b3c62de:skills/create-adaptable-composable/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 # Create Adaptable Composable
 

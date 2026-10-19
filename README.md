@@ -135,7 +135,7 @@ At the start of each session an agent loads the name and description of every in
 | `find-skills` | 79 | 0 | 0 KB |
 | `nuxt` | 95 | 38 | 206 KB |
 | `vitepress` | 42 | 14 | 59 KB |
-| `vue` | 91 | 351 | 1013 KB |
+| `vue` | 91 | 351 | 1020 KB |
 | `vue-a11y` | 89 | 3 | 12 KB |
 | `vue-ci` | 110 | 1 | 12 KB |
 | `vue-clean-components` | 86 | 7 | 15 KB |
@@ -144,9 +144,9 @@ At the start of each session an agent loads the name and description of every in
 | `vue-forms` | 78 | 16 | 46 KB |
 | `vue-performance` | 88 | 4 | 12 KB |
 | `vue-review` | 98 | 1 | 6 KB |
-| `vue-ui` | 105 | 67 | 205 KB |
+| `vue-ui` | 105 | 69 | 208 KB |
 | `vue-upgrade` | 90 | 9 | 21 KB |
-| **Total (17 skills)** | **1486** | **802** | **2.8 MB** |
+| **Total (17 skills)** | **1486** | **804** | **2.8 MB** |
 
 Installing the 30 upstream skills bundled here one by one would load 30 descriptions, about 1731 tokens, at every session start. This repo loads 17 descriptions, about 1486 tokens, and that already includes the hand-written workflow skills.
 <!-- stats:end -->

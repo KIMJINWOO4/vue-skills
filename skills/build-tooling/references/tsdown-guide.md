@@ -1,4 +1,4 @@
-<!-- Synced from rolldown/tsdown@b46c0d4:skills/tsdown/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from rolldown/tsdown@3b5f4ee:skills/tsdown/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 # tsdown - The Elegant Library Bundler
 
