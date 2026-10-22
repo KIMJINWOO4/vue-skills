@@ -1,10 +1,10 @@
-<!-- Synced from onmax/nuxt-skills@46aaca0:skills/reka-ui/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from onmax/nuxt-skills@e504c9b:skills/reka-ui/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 # Reka UI
 
 Unstyled, accessible Vue 3 component primitives. WAI-ARIA compliant. Previously Radix Vue.
 
-**Current version:** v2.10.5 (September 2026)
+**Current version:** v2.11.0 (October 2026)
 
 ## When to Use
 
