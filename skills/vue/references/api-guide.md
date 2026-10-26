@@ -1,4 +1,4 @@
-<!-- Synced from antfu/skills@feb0f3a:skills/vue/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from antfu/skills@8886fe2:skills/vue/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 # Vue
 

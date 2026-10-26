@@ -36,16 +36,16 @@ const props = withDefaults(defineProps<Props>(), {
 
 When you have multiple instances of this component:
 ```vue
+<script setup>
+// If comp1 modifies its items, comp2's items change too!
+comp1.value.items.push('new item')  // comp2 also has 'new item' now
+</script>
+
 <template>
   <!-- Both share the SAME items array! -->
   <MyComponent ref="comp1" />
   <MyComponent ref="comp2" />
 </template>
-
-<script setup>
-// If comp1 modifies its items, comp2's items change too!
-comp1.value.items.push('new item')  // comp2 also has 'new item' now
-</script>
 ```
 
 ## The Solution: Factory Functions

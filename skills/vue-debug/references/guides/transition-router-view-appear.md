@@ -67,14 +67,6 @@ Since the component wasn't present in the initial render and is "inserted" after
 ## If You Want to Disable Initial Animation
 
 ```vue
-<template>
-  <RouterView v-slot="{ Component }">
-    <Transition :name="isInitialLoad ? '' : 'fade'" mode="out-in">
-      <component :is="Component" />
-    </Transition>
-  </RouterView>
-</template>
-
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
@@ -90,19 +82,19 @@ router.isReady().then(() => {
   }, 0)
 })
 </script>
+
+<template>
+  <RouterView v-slot="{ Component }">
+    <Transition :name="isInitialLoad ? '' : 'fade'" mode="out-in">
+      <component :is="Component" />
+    </Transition>
+  </RouterView>
+</template>
 ```
 
 ## Alternative: Use CSS to Skip First Animation
 
 ```vue
-<template>
-  <RouterView v-slot="{ Component }">
-    <Transition name="fade" mode="out-in">
-      <component :is="Component" :class="{ 'skip-initial': isInitialLoad }" />
-    </Transition>
-  </RouterView>
-</template>
-
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -114,6 +106,14 @@ router.isReady().then(() => {
   isInitialLoad.value = false
 })
 </script>
+
+<template>
+  <RouterView v-slot="{ Component }">
+    <Transition name="fade" mode="out-in">
+      <component :is="Component" :class="{ 'skip-initial': isInitialLoad }" />
+    </Transition>
+  </RouterView>
+</template>
 
 <style>
 .fade-enter-active,

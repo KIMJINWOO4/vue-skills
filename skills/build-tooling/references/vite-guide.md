@@ -1,4 +1,4 @@
-<!-- Synced from antfu/skills@feb0f3a:skills/vite/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from antfu/skills@8886fe2:skills/vite/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 # Vite
 

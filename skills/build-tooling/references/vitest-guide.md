@@ -1,4 +1,4 @@
-<!-- Synced from antfu/skills@feb0f3a:skills/vitest/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from antfu/skills@8886fe2:skills/vitest/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 Vitest is a next-generation testing framework powered by Vite. It provides a Jest-compatible API with native ESM, TypeScript, and JSX support out of the box. Vitest shares the same config, transformers, resolvers, and plugins with your Vite app.
 
@@ -11,7 +11,7 @@ Vitest is a next-generation testing framework powered by Vite. It provides a Jes
 - Built-in coverage via V8 or Istanbul
 - Snapshot testing, mocking, and spy utilities
 
-> The skill is based on Vitest 5.0.1, generated at 2026-09-25.
+> The skill is based on Vitest 5.1.0-beta.1, generated at 2026-10-23.
 
 ## Core
 

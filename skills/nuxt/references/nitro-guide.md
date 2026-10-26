@@ -1,4 +1,4 @@
-<!-- Synced from antfu/skills@feb0f3a:skills/nitro/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from antfu/skills@8886fe2:skills/nitro/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 > The skill is based on Nitro v3 (beta, 3.0.260903), generated at 2026-09-25.
 

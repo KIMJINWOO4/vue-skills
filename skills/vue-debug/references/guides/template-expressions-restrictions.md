@@ -43,6 +43,28 @@ Template interpolation `{{ }}` and directive bindings evaluate JavaScript expres
 
 **Correct:**
 ```vue
+<script setup>
+import { ref, computed } from 'vue'
+
+const ok = ref(true)
+const message = ref('Hello')
+const user = ref({ name: 'Alice' })
+const score = ref(85)
+
+// Move complex logic to computed properties
+const greeting = computed(() => {
+  if (user.value) {
+    return `Welcome back, ${user.value.name}!`
+  }
+  return 'Hello, Guest!'
+})
+
+// Or use methods for reusable logic
+function formatDate(date) {
+  return new Date(date).toLocaleDateString()
+}
+</script>
+
 <template>
   <!-- OK: Simple expressions -->
   <p>{{ message }}</p>
@@ -67,28 +89,6 @@ Template interpolation `{{ }}` and directive bindings evaluate JavaScript expres
   <!-- OK: Object/array expressions -->
   <p>{{ { name: 'Vue', version: 3 } }}</p>
 </template>
-
-<script setup>
-import { ref, computed } from 'vue'
-
-const ok = ref(true)
-const message = ref('Hello')
-const user = ref({ name: 'Alice' })
-const score = ref(85)
-
-// Move complex logic to computed properties
-const greeting = computed(() => {
-  if (user.value) {
-    return `Welcome back, ${user.value.name}!`
-  }
-  return 'Hello, Guest!'
-})
-
-// Or use methods for reusable logic
-function formatDate(date) {
-  return new Date(date).toLocaleDateString()
-}
-</script>
 ```
 
 ## Use Directives for Control Flow
