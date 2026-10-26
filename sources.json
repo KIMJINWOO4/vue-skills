@@ -1,12 +1,12 @@
 {
   "$comment": "Upstream content synced by scripts/sync.mjs. Each 'to' path is generated: edit this file, not the output. 'pin: true' keeps a source at its commit when running --update.",
-  "synced": "2026-10-19",
+  "synced": "2026-10-26",
   "sources": [
     {
       "id": "antfu-skills",
       "repo": "https://github.com/antfu/skills",
       "branch": "main",
-      "commit": "feb0f3aba6566426f12230e7fc7a10d97c1293bb",
+      "commit": "8886fe2d385d3644cbb47e46ae9cb1cf09307d3b",
       "license": "MIT",
       "copy": [
         {
@@ -136,7 +136,7 @@
       "id": "vuejs-ai",
       "repo": "https://github.com/vuejs-ai/skills",
       "branch": "main",
-      "commit": "b3c62deb258b62791e57917b0960420151523d39",
+      "commit": "198f0cd8f7f9c0a3d9b566ccc16de6677519ee78",
       "license": "MIT",
       "copy": [
         {
@@ -280,7 +280,7 @@
       "id": "tsdown",
       "repo": "https://github.com/rolldown/tsdown",
       "branch": "main",
-      "commit": "3b5f4ee173b75f6a36a8c6829ceef8db45f829c3",
+      "commit": "3c0c8545c418e4a26f073a3d17a58afad3291263",
       "license": "MIT",
       "copy": [
         {
@@ -330,7 +330,7 @@
       "id": "nuxt-ui",
       "repo": "https://github.com/nuxt/ui",
       "branch": "v4",
-      "commit": "2b7020416c40f285e0bdbc98802f0d758f778759",
+      "commit": "92e28dcb2537755b914aee359edb8064d474de5c",
       "license": "MIT",
       "copy": [
         {
@@ -351,7 +351,7 @@
       "id": "nuxt-skills",
       "repo": "https://github.com/onmax/nuxt-skills",
       "branch": "main",
-      "commit": "e504c9b90abd3c41ab1b10470363f6cd50b7a6f8",
+      "commit": "026138689d496551f0e1040a2e93f55671092e54",
       "license": "MIT",
       "copy": [
         {
@@ -468,7 +468,7 @@
       "id": "vercel-skills",
       "repo": "https://github.com/vercel-labs/skills",
       "branch": "main",
-      "commit": "13e4063a1cf913f5606d57d42ab83a86f5001e04",
+      "commit": "a80e4c9d12d607631249d4d7d059f835d4b2f13a",
       "license": "MIT",
       "copy": [
         {

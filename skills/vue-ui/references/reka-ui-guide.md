@@ -1,4 +1,4 @@
-<!-- Synced from onmax/nuxt-skills@e504c9b:skills/reka-ui/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from onmax/nuxt-skills@0261386:skills/reka-ui/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 # Reka UI
 

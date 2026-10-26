@@ -49,15 +49,15 @@ tags: [vue3, events, components, emit, click, migration]
 ```html
 <!-- CORRECT: Child component emits the click event -->
 <!-- MyButton.vue -->
+<script setup>
+defineEmits(['click'])
+</script>
+
 <template>
   <button @click="$emit('click', $event)">
     <slot></slot>
   </button>
 </template>
-
-<script setup>
-defineEmits(['click'])
-</script>
 
 <!-- Parent.vue -->
 <template>
@@ -84,18 +84,18 @@ defineEmits(['click'])
 ```html
 <!-- CORRECT: Multi-root component with explicit $attrs binding -->
 <!-- MyButton.vue -->
+<script setup>
+defineOptions({
+  inheritAttrs: false
+})
+</script>
+
 <template>
   <span>Icon</span>
   <button v-bind="$attrs">
     <slot></slot>
   </button>
 </template>
-
-<script setup>
-defineOptions({
-  inheritAttrs: false
-})
-</script>
 ```
 
 ## Component Events Don't Bubble

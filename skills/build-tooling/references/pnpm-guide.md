@@ -1,4 +1,4 @@
-<!-- Synced from antfu/skills@feb0f3a:skills/pnpm/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from antfu/skills@8886fe2:skills/pnpm/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 pnpm is a fast, disk space efficient package manager. It uses a content-addressable store to deduplicate packages across all projects on a machine, and enforces strict dependency resolution by default, preventing phantom dependencies.
 

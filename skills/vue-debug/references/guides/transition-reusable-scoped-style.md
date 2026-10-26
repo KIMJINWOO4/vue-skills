@@ -161,22 +161,6 @@ Use the custom class props to apply scoped classes:
 
 ```vue
 <!-- transitions/SlideTransition.vue -->
-<template>
-  <Transition
-    name="slide"
-    :mode="mode"
-    :appear="appear"
-    @before-enter="$emit('before-enter', $event)"
-    @enter="$emit('enter', $event)"
-    @after-enter="$emit('after-enter', $event)"
-    @before-leave="$emit('before-leave', $event)"
-    @leave="$emit('leave', $event)"
-    @after-leave="$emit('after-leave', $event)"
-  >
-    <slot />
-  </Transition>
-</template>
-
 <script setup>
 defineProps({
   mode: {
@@ -195,6 +179,22 @@ defineEmits([
   'before-leave', 'leave', 'after-leave'
 ])
 </script>
+
+<template>
+  <Transition
+    name="slide"
+    :mode="mode"
+    :appear="appear"
+    @before-enter="$emit('before-enter', $event)"
+    @enter="$emit('enter', $event)"
+    @after-enter="$emit('after-enter', $event)"
+    @before-leave="$emit('before-leave', $event)"
+    @leave="$emit('leave', $event)"
+    @after-leave="$emit('after-leave', $event)"
+  >
+    <slot />
+  </Transition>
+</template>
 
 <!-- Unscoped so styles apply to slotted content -->
 <style>

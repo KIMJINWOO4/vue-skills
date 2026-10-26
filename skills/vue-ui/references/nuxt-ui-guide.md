@@ -1,4 +1,4 @@
-<!-- Synced from nuxt/ui@2b70204:skills/nuxt-ui/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from nuxt/ui@92e28dc:skills/nuxt-ui/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 # Nuxt UI
 
