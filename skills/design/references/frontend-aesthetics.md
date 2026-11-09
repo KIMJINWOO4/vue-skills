@@ -1,4 +1,4 @@
-<!-- Synced from anthropics/skills@dbd4588:skills/frontend-design/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from anthropics/skills@2c5958e:skills/frontend-design/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 # Frontend Design
 
