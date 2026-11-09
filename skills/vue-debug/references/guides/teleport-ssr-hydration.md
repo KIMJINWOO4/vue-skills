@@ -57,17 +57,6 @@ server rendered element contains fewer child nodes than client vdom.
 
 **Solution 2 - Manual Client Detection:**
 ```vue
-<template>
-  <button @click="showModal = true">Open Modal</button>
-
-  <!-- Only render after component mounts on client -->
-  <Teleport v-if="isMounted" to="body">
-    <div v-if="showModal" class="modal">
-      Modal content
-    </div>
-  </Teleport>
-</template>
-
 <script setup>
 import { ref, onMounted } from 'vue'
 
@@ -78,6 +67,17 @@ onMounted(() => {
   isMounted.value = true
 })
 </script>
+
+<template>
+  <button @click="showModal = true">Open Modal</button>
+
+  <!-- Only render after component mounts on client -->
+  <Teleport v-if="isMounted" to="body">
+    <div v-if="showModal" class="modal">
+      Modal content
+    </div>
+  </Teleport>
+</template>
 ```
 
 **Solution 3 - Vue 3.5+ data-allow-mismatch:**

@@ -53,12 +53,6 @@ The ESLint rule `vue/no-use-v-if-with-v-for` enforces this best practice.
 **Correct:**
 ```html
 <!-- CORRECT: Filter with computed property -->
-<template>
-  <li v-for="user in activeUsers" :key="user.id">
-    {{ user.name }}
-  </li>
-</template>
-
 <script setup>
 import { computed } from 'vue'
 
@@ -68,6 +62,12 @@ const activeUsers = computed(() =>
   props.users.filter(user => user.isActive)
 )
 </script>
+
+<template>
+  <li v-for="user in activeUsers" :key="user.id">
+    {{ user.name }}
+  </li>
+</template>
 ```
 
 ```html

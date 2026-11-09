@@ -19,6 +19,16 @@ tags: [vue3, animation, key, autoanimate, rerender, dom]
 
 **Problematic Code:**
 ```vue
+<script setup>
+import { ref } from 'vue'
+
+const message = ref('Hello')
+const imageUrl = ref('/images/photo1.jpg')
+
+// Changing these won't trigger animations because
+// Vue updates the existing elements rather than replacing them
+</script>
+
 <template>
   <!-- BAD: Text changes but no animation occurs -->
   <div v-auto-animate>
@@ -33,20 +43,22 @@ tags: [vue3, animation, key, autoanimate, rerender, dom]
   <!-- BAD: Route changes don't animate -->
   <router-view v-auto-animate />  <!-- No key -->
 </template>
+```
 
+**Correct Code:**
+```vue
 <script setup>
 import { ref } from 'vue'
 
 const message = ref('Hello')
 const imageUrl = ref('/images/photo1.jpg')
 
-// Changing these won't trigger animations because
-// Vue updates the existing elements rather than replacing them
+// Now changing these will trigger animations
+function updateMessage() {
+  message.value = 'World'  // Triggers enter animation for new <p>
+}
 </script>
-```
 
-**Correct Code:**
-```vue
 <template>
   <!-- GOOD: Key forces re-render, triggering animation -->
   <div v-auto-animate>
@@ -61,18 +73,6 @@ const imageUrl = ref('/images/photo1.jpg')
   <!-- GOOD: Route changes animate properly -->
   <router-view :key="$route.fullPath" v-auto-animate />
 </template>
-
-<script setup>
-import { ref } from 'vue'
-
-const message = ref('Hello')
-const imageUrl = ref('/images/photo1.jpg')
-
-// Now changing these will trigger animations
-function updateMessage() {
-  message.value = 'World'  // Triggers enter animation for new <p>
-}
-</script>
 ```
 
 ## Why This Works

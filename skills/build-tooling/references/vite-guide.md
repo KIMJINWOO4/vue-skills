@@ -1,8 +1,8 @@
-<!-- Synced from antfu/skills@feb0f3a:skills/vite/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from antfu/skills@f63e9ec:skills/vite/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 # Vite
 
-> Based on Vite v8.3.1 (Rolldown-powered), generated at 2026-09-25. Vite 8 uses the Rolldown bundler and the Oxc transformer instead of esbuild + Rollup.
+> Based on Vite v8.3.5 (Rolldown-powered), generated at 2026-11-05. Vite 8 uses the Rolldown bundler and the Oxc transformer instead of esbuild + Rollup.
 
 Vite is a next-generation frontend build tool with fast dev server (native ESM + HMR) and optimized production builds.
 

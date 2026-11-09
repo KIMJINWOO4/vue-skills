@@ -1,4 +1,4 @@
-<!-- Synced from onmax/nuxt-skills@e504c9b:skills/nuxt-modules/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from onmax/nuxt-skills@16f9097:skills/nuxt-modules/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 # Nuxt Module Development
 
@@ -19,6 +19,7 @@ npm run test       # Run tests
 ## Available Guidance
 
 - **[references/development.md](modules/development.md)** - Module anatomy, defineNuxtModule, Kit utilities, hooks
+- **[references/template-dependencies.md](modules/template-dependencies.md)** - Template inputs, restart behavior, and targeted development regeneration
 - **[references/testing-and-publishing.md](modules/testing-and-publishing.md)** - E2E testing, best practices, releasing, publishing
 - **[references/ci-workflows.md](modules/ci-workflows.md)** - Copy-paste CI/CD workflow templates
 
@@ -27,6 +28,7 @@ npm run test       # Run tests
 **Consider loading these reference files based on your task:**
 
 - [ ] [references/development.md](modules/development.md) - if building module features, using defineNuxtModule, or working with Kit utilities
+- [ ] [references/template-dependencies.md](modules/template-dependencies.md) - if generating templates, declaring `dependsOn`, choosing watcher behavior, or targeting regeneration
 - [ ] [references/testing-and-publishing.md](modules/testing-and-publishing.md) - if writing E2E tests, publishing to npm, or following best practices
 - [ ] [references/ci-workflows.md](modules/ci-workflows.md) - if setting up CI/CD workflows for your module
 
