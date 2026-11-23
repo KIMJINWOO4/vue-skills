@@ -1,4 +1,4 @@
-<!-- Synced from vuejs-ai/skills@b3c62de:skills/vue-debug-guides/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from vuejs-ai/skills@198f0cd:skills/vue-debug-guides/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 Vue 3 debugging and error handling for runtime issues, warnings, async failures, and hydration bugs.
 For development best practices and common gotchas, use `vue-best-practices`.

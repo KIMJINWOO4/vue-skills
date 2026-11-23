@@ -16,6 +16,14 @@ In SSR applications, hydration mismatches cause:
 ## Bad Code
 
 ```vue
+<script setup>
+import { defineAsyncComponent } from 'vue'
+
+const AsyncDashboard = defineAsyncComponent(
+  () => import('./Dashboard.vue')
+)
+</script>
+
 <template>
   <!-- Async component directly in Suspense can fail hydration -->
   <Suspense>
@@ -25,14 +33,6 @@ In SSR applications, hydration mismatches cause:
     </template>
   </Suspense>
 </template>
-
-<script setup>
-import { defineAsyncComponent } from 'vue'
-
-const AsyncDashboard = defineAsyncComponent(
-  () => import('./Dashboard.vue')
-)
-</script>
 ```
 
 ## Good Code

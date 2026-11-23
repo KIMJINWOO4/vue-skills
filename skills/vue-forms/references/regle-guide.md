@@ -1,4 +1,4 @@
-<!-- Synced from victorgarciaesgi/regle@c2668d6:skills/regle/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from victorgarciaesgi/regle@eb64a19:skills/regle/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 # Regle
 
@@ -29,7 +29,7 @@ pnpm add @regle/core @regle/rules
 pnpm add @regle/schemas
 ```
 
-Requires Vue 3.3+ and TypeScript 5.1+.
+Requires Vue 3.5+ and TypeScript 5.1+.
 
 ## Quick Start
 

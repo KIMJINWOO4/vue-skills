@@ -41,17 +41,17 @@ tags: [vue3, slots, scoped-slots, reserved-props, naming]
 **If You Need to Pass a "Name" Value:**
 ```vue
 <!-- ChildComponent.vue -->
+<script setup>
+const slotLabel = 'header'
+const title = 'Welcome'
+</script>
+
 <template>
   <div>
     <!-- Use a different prop name like 'slotName' or 'label' -->
     <slot name="header" :label="slotLabel" :title="title"></slot>
   </div>
 </template>
-
-<script setup>
-const slotLabel = 'header'
-const title = 'Welcome'
-</script>
 ```
 
 ```vue
@@ -78,17 +78,17 @@ const title = 'Welcome'
 
 ```vue
 <!-- TabPanel.vue -->
+<script setup>
+import { ref } from 'vue'
+const activeTab = ref(1)
+</script>
+
 <template>
   <div class="tabs">
     <slot name="tab1" :active="activeTab === 1" :label="'First Tab'"></slot>
     <slot name="tab2" :active="activeTab === 2" :label="'Second Tab'"></slot>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-const activeTab = ref(1)
-</script>
 ```
 
 ```vue

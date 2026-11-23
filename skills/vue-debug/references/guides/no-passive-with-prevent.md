@@ -67,12 +67,6 @@ tags: [vue3, events, modifiers, scroll, touch, performance]
 
 ```html
 <!-- CORRECT: For touch events where you need to prevent -->
-<template>
-  <div @touchmove="handleTouchMove">
-    <!-- Handle prevention conditionally in JS -->
-  </div>
-</template>
-
 <script setup>
 function handleTouchMove(event) {
   if (shouldPreventScroll.value) {
@@ -81,6 +75,12 @@ function handleTouchMove(event) {
   // ... handle touch
 }
 </script>
+
+<template>
+  <div @touchmove="handleTouchMove">
+    <!-- Handle prevention conditionally in JS -->
+  </div>
+</template>
 ```
 
 ## Understanding .passive

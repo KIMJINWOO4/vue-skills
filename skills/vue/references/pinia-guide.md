@@ -1,4 +1,4 @@
-<!-- Synced from antfu/skills@feb0f3a:skills/pinia/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from antfu/skills@4a6bb39:skills/pinia/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 # Pinia
 
