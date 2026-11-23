@@ -1,4 +1,4 @@
-<!-- Synced from onmax/nuxt-skills@e504c9b:skills/reka-ui/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from onmax/nuxt-skills@b4e1a3f:skills/reka-ui/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 # Reka UI
 
@@ -115,8 +115,12 @@ const open = ref(false)
 </DialogTrigger>
 ```
 
-## Recent Updates (v2.6.0-v2.10.5)
+## Recent Updates (v2.6.0-v2.11.0)
 
+- **v3 (alpha)**: v3.0.0-alpha.0 is pre-release, not for production. Breaking: ESM-only (no CJS), `data-state` normalized to open/closed and checked/unchecked axes (codemod provided), Calendar unified via view/granularity, scroll lock/modality changes (no body pointer-events). Stay on v2.x for stable work.
+- **v2.11.0 new**: TagGroup, Field and Form primitives, Toast manager, DrawerVirtualKeyboardProvider
+- **v2.11.0 props**: `loop` keyboard navigation (Listbox, Select, Tree), Checkbox `max`, Combobox `unmountOnHide`, NumberField `startingValue`/`allowInvalid`
+- **v2.9.10**: On Vue 3.5+, ConfigProvider `useId` option takes precedence over Vue's native `useId`
 - **New components**: Drawer with swipe gestures (v2.10.0), Autocomplete, TimeRangeField, Color components (ColorArea etc.), MonthPicker/YearPicker (v2.9.0)
 - **DropdownMenu**: filter component (v2.9.0)
 - **Checkbox/Switch**: custom true/false values (v2.9.0)

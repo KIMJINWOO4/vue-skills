@@ -1,4 +1,4 @@
-<!-- Synced from vuejs-ai/skills@b3c62de:skills/vue-best-practices/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from vuejs-ai/skills@198f0cd:skills/vue-best-practices/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 # Vue Best Practices Workflow
 

@@ -1,4 +1,4 @@
-<!-- Synced from victorgarciaesgi/regle@c2668d6:skills/regle-schemas/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
+<!-- Synced from victorgarciaesgi/regle@eb64a19:skills/regle-schemas/SKILL.md by scripts/sync.mjs. Edit sources.json, not this file. -->
 
 # Regle Schemas
 

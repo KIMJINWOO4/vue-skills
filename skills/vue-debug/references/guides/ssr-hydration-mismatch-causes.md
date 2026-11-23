@@ -77,6 +77,17 @@ Server and client generate different random values.
 
 **Incorrect:**
 ```vue
+<script setup>
+import { computed } from 'vue'
+
+const items = [/* ... */]
+
+// WRONG: Random shuffle runs differently on server and client
+const shuffledItems = computed(() =>
+  [...items].sort(() => Math.random() - 0.5)
+)
+</script>
+
 <template>
   <!-- WRONG: Different ID on server vs client -->
   <div :id="'field-' + Math.random()">
@@ -88,31 +99,10 @@ Server and client generate different random values.
     {{ item.name }}
   </div>
 </template>
-
-<script setup>
-import { computed } from 'vue'
-
-const items = [/* ... */]
-
-// WRONG: Random shuffle runs differently on server and client
-const shuffledItems = computed(() =>
-  [...items].sort(() => Math.random() - 0.5)
-)
-</script>
 ```
 
 **Correct - Client-Only Random:**
 ```vue
-<template>
-  <div :id="fieldId">
-    Form field
-  </div>
-
-  <div v-for="item in displayItems" :key="item.id">
-    {{ item.name }}
-  </div>
-</template>
-
 <script setup>
 import { ref, onMounted } from 'vue'
 
@@ -128,6 +118,16 @@ onMounted(() => {
   displayItems.value = [...items].sort(() => Math.random() - 0.5)
 })
 </script>
+
+<template>
+  <div :id="fieldId">
+    Form field
+  </div>
+
+  <div v-for="item in displayItems" :key="item.id">
+    {{ item.name }}
+  </div>
+</template>
 ```
 
 **Correct - Seeded Random:**
@@ -151,6 +151,12 @@ Server may be in different timezone than client.
 
 **Incorrect:**
 ```vue
+<script setup>
+function formatDate(date) {
+  return new Date(date).toLocaleDateString()
+}
+</script>
+
 <template>
   <!-- WRONG: Server time != client time -->
   <span>{{ new Date().toLocaleTimeString() }}</span>
@@ -158,24 +164,10 @@ Server may be in different timezone than client.
   <!-- WRONG: Server formats dates in server's timezone -->
   <span>{{ formatDate(article.createdAt) }}</span>
 </template>
-
-<script setup>
-function formatDate(date) {
-  return new Date(date).toLocaleDateString()
-}
-</script>
 ```
 
 **Correct:**
 ```vue
-<template>
-  <!-- CORRECT: Render placeholder, update on client -->
-  <span>{{ displayTime || 'Loading...' }}</span>
-
-  <!-- CORRECT: Use UTC or defer to client -->
-  <span>{{ formattedDate }}</span>
-</template>
-
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 
@@ -201,6 +193,14 @@ const formattedDate = computed(() => {
   }
 })
 </script>
+
+<template>
+  <!-- CORRECT: Render placeholder, update on client -->
+  <span>{{ displayTime || 'Loading...' }}</span>
+
+  <!-- CORRECT: Use UTC or defer to client -->
+  <span>{{ formattedDate }}</span>
+</template>
 ```
 
 ## Cause 4: Browser Extensions and Modifications

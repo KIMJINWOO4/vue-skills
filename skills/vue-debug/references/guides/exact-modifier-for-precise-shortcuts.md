@@ -99,22 +99,6 @@ tags: [vue3, events, keyboard, modifiers, shortcuts, accessibility]
 ## Practical Example: File Browser Selection
 
 ```vue
-<template>
-  <ul class="file-list">
-    <li
-      v-for="file in files"
-      :key="file.id"
-      @click.exact="selectSingle(file)"
-      @click.ctrl.exact="toggleSelection(file)"
-      @click.shift.exact="selectRange(file)"
-      @click.ctrl.shift.exact="addRangeToSelection(file)"
-      :class="{ selected: isSelected(file) }"
-    >
-      {{ file.name }}
-    </li>
-  </ul>
-</template>
-
 <script setup>
 // Each click type has distinct, non-overlapping behavior
 function selectSingle(file) {
@@ -133,6 +117,22 @@ function addRangeToSelection(file) {
   // Add range to existing selection
 }
 </script>
+
+<template>
+  <ul class="file-list">
+    <li
+      v-for="file in files"
+      :key="file.id"
+      @click.exact="selectSingle(file)"
+      @click.ctrl.exact="toggleSelection(file)"
+      @click.shift.exact="selectRange(file)"
+      @click.ctrl.shift.exact="addRangeToSelection(file)"
+      :class="{ selected: isSelected(file) }"
+    >
+      {{ file.name }}
+    </li>
+  </ul>
+</template>
 ```
 
 ## Keyboard Shortcuts with .exact

@@ -39,16 +39,16 @@ This is a common bug when wrapping native elements or migrating from Vue 2 to Vu
 
 ```vue
 <!-- Parent.vue -->
-<template>
-  <!-- This handler fires TWICE on each click! -->
-  <MyButton @click="handleClick">Click me</MyButton>
-</template>
-
 <script setup>
 function handleClick() {
   console.log('clicked') // Logs twice!
 }
 </script>
+
+<template>
+  <!-- This handler fires TWICE on each click! -->
+  <MyButton @click="handleClick">Click me</MyButton>
+</template>
 ```
 
 **What happens:**
